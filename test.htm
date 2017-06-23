@@ -54,12 +54,32 @@
                 [ "Chad","00","00","00","00","00","00", "na", "na" ]
 
             ];
+            $.fn.dataTable.ext.buttons.alert = {
+                className: 'buttons-alert',
+
+                action: function ( e, dt, node, config ) {
+                    alert( this.text() );
+                }
+            };
 
             $(document).ready(function() {
                 $('#example').DataTable( {
+                    dom: 'Bfrtip',
                     select: {
                         style: 'multi'
                     },
+
+                    buttons: [
+                        {
+                            extend: 'alert',
+                            text: 'Compare to UPG Nations'
+                        },
+                        {
+                            extend: 'alert',
+                            text: 'Compare Cultures'
+                        }
+                    ],
+
                     data: dataSet,
                     columns: [
                         { title: "Country" },
@@ -253,10 +273,7 @@
 				<h1>Comparisons</h1>
 				<table id="example" class="display dataTable no-footer" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
 				</table>
-				<p> Front page "chart" and the executing buttons go here...</p>
-				<button type="button">Compare to UPG Nations... will fire onclick function</button>
-				<button type="button">Compare Cultures... will fire onclick function</button>
-				
+
 			</div>
 		</section>
 			
