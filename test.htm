@@ -34,24 +34,24 @@
 
             var dataSet = [
 
-                [ "Albania","00","00","00","00","00","00", "na", "na" ],
-                [ "Angola","00","00","00","00","00","00", "na", "na" ],
-                [ "Argentina","00","00","00","00","00","00", "na", "na" ],
-                [ "Australia","00","00","00","00","00","00", "na", "na" ],
-                [ "Bangladesh","00","00","00","00","00","00", "na", "na" ],
-                [ "Belgium","00","00","00","00","00","00", "na", "na" ],
-                [ "Bhutan","00","00","00","00","00","00", "na", "na" ],
-                [ "Bolivia","00","00","00","00","00","00", "na", "na" ],
-                [ "Brazil","00","00","00","00","00","00", "na", "na" ],
-                [ "Bulgaria","00","00","00","00","00","00", "na", "na" ],
-                [ "Burkina Faso","00","00","00","00","00","00", "na", "na" ],
-                [ "Burundi","00","00","00","00","00","00", "na", "na" ],
-                [ "Cameroon","00","00","00","00","00","00", "na", "na" ],
-                [ "Canada","00","00","00","00","00","00", "na", "na" ],
-                [ "Cape Verde","00","00","00","00","00","00", "na", "na" ],
-                [ "Central African Republic","00","00","00","00","00","00", "na", "na" ],
-                [ "Albania","00","00","00","00","00","00", "na", "na" ],
-                [ "Chad","00","00","00","00","00","00", "na", "na" ]
+                [ "Albania", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Angola", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Argentina", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Australia", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bangladesh", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Belgium", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bhutan", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bolivia", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Brazil", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bulgaria", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Burkina Faso", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Burundi", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Cameroon", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Canada", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Cape Verde", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Central African Republic", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Albania", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Chad", "00", "00", "00", "00", "00", "00", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ]
 
             ];
             $.fn.dataTable.ext.buttons.alert = {
@@ -64,6 +64,7 @@
 
             $(document).ready(function() {
                 $('#example').DataTable( {
+                    "scrollX": true,
                     dom: 'Bfrtip',
                     select: {
                         style: 'multi'
@@ -89,8 +90,19 @@
                         { title: "Uncertainty Avoidance" },
                         { title: "Long Term Orientation" },
                         { title: "Indulgence" },
+                        { title: "UPG Nation" },
+                        { title: "Mob Index Nation" },
+                        { title: "Government Restrictions Index (GRI)" },
+                        { title: "Social Hostilities Index (SHI)" },
+                        { title: "Prosperity Rank" },
+                        { title: "Evangelical #s" },
+                        { title: "Current Sending In Country" },
+                        { title: "Current Sending Abroad" },
+                        { title: "% less than 15 years" },
+                        { title: "In Country UPG Access" },
+                        { title: "Regional UPG Access" },
                         { title: "Median" },
-                        { title: "Geographic Distance" }
+                        { title: "Geographic Distance" },
                     ]
 
                 } );
