@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<title>Country Comparisons</title>
+			
+	
+	<link rel="pingback" href="http://www.mobilization.org/xmlrpc.php" />
+					
+		<!--[if lt IE 9]>
+	<script src="http://www.mobilization.org/wp-content/themes/Divi-child/js/html5.js" type="text/javascript"></script>
+	<![endif]-->
+
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+	<!--	/* DataTables Stuff */   -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/b-1.3.1/cr-1.3.3/fc-3.2.2/fh-3.1.2/r-2.1.1/rg-1.0.0/rr-1.2.0/sc-1.4.2/se-1.2.2/datatables.min.css"/>
+
+	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-1.10.15/b-1.3.1/cr-1.3.3/fc-3.2.2/fh-3.1.2/r-2.1.1/rg-1.0.0/rr-1.2.0/sc-1.4.2/se-1.2.2/datatables.min.js"></script>
+
+        <script type="text/javascript" class="init">
+
+            function post(path, params, method) {
+                method = method || "post"; // Set method to post by default if not specified.
+
+                // The rest of this code assumes you are not using a library.
+                // It can be made less wordy if you use one.
+                var form = document.createElement("form");
+                form.setAttribute("method", method);
+                form.setAttribute("action", path);
+
+                for(var key in params) {
+                    if(params.hasOwnProperty(key)) {
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type", "hidden");
+                        hiddenField.setAttribute("name", key);
+                        hiddenField.setAttribute("value", params[key]);
+
+                        form.appendChild(hiddenField);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            var dataSet = [
+
+                [ "Albania", "90", "20", "80", "70", "61", "15", "no", "no", "na", "na", "74", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Angola", "83", "18", "20", "60", "15", "83", "no", "yes", "0.5", "0.29", "141", "4,500,000", "70", "25", "0.48", "308,000", "76,200,000", "na", "na" ],
+                [ "Argentina", "49", "46", "56", "86", "20", "62", "no", "yes", "0.2", "0.14", "49", "3,500,000", "120", "350", "0.25", "190,000", "772,000", "na", "na" ],
+                [ "Austria", "11", "55", "79", "70", "60", "63", "no", "no", "na", "na", "15", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Australia", "36", "90", "61", "51", "21", "71", "no", "yes", "0.14", "0.14", "6", "3,000,000", "1600", "2200", "0.19", "739,000", "1,026,000", "na", "na" ],
+                [ "Bangladesh", "80", "20", "55", "60", "47", "20", "yes", "no", "na", "na", "114", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Belgium", "65", "75", "54", "94", "82", "57", "no", "no", "na", "na", "16", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bhutan", "94", "52", "32", "28", "na", "na", "yes", "no", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Bolivia", "na", "na", "na", "na", "na", "na", "no", "yes", "0.15", "0", "79", "1,600,000", "70", "70", "32%", "2800", "772,000", "na", "na" ],
+                [ "Brazil", "69", "38", "49", "76", "44", "59", "no", "yes", "0.02", "0.37", "52", "50,000,000", "2000", "2200", "0.23", "118000", "772,000", "na", "na" ],
+                [ "Bulgaria", "70", "30", "40", "85", "68", "16", "no", "no", "na", "na", "57", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Burkina Faso", "70", "15", "50", "55", "27", "27", "yes", "yes", "0.13", "0.31", "112", "1.400,000", "140", "30", "0.46", "4,732,000", "158,380,000", "na", "na" ],
+                [ "Burundi", "na", "na", "na", "na", "na", "na", "no", "no", "0.23", "0.1", "140", "2,500,000", "600", "9", "0.38", "19,000", "76,200,000", "na", "na" ],
+                [ "Cameroon", "na", "na", "na", "na", "na", "na", "no", "no", "0.18", "0.06", "127", "1,800,000", "400", "70", "0.48", "3,430,000", "158,380,000", "na", "na" ],
+                [ "Canada", "39", "80", "52", "48", "36", "68", "no", "yes", "0.12", "0.12", "5", "2,500,000", "3000", "3000", "0.16", "1,630,000", "12,386,000", "na", "na" ],
+                [ "Cape Verde", "75", "20", "15", "40", "2", "83", "no", "no", "na", "na", "00", "na", "na", "na", "na", "na", "na", "na", "na" ],
+                [ "Central African Republic", "na", "na", "na", "na", "na", "na", "no", "yes", "0.42", "0.76", "147", "1,400,000", "120", "8", "41%", "490,000", "158,380,000", "na", "na" ],
+                [ "Chad", "na", "na", "na", "na", "na", "na", "no", "yes", "0.3", "0.22", "144", "1,200,000", "120", "12", "46%", "7,925,000", "158,380,000", "na", "na" ],
+                [ "Chile", "63", "23", "28", "86", "31", "68", "no", "yes", "0.16", "0.12", "31", "3,000,000", "140", "140", "0.2", "24,000", "772,000", "na", "na" ],
+                [ "China", "80", "20", "66", "30", "87", "24", "yes", "yes", "0.91", "0.44", "90", "80,000,000", "100,000", "2000", "0.2", "183,423,000", "340,873,000", "na", "na" ]
+
+            ];
+
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    "scrollX": true,
+                    dom: 'Bfrtip',
+                    select: {
+                        style: 'multi'
+                    },
+
+                    buttons: [
+                        {
+                            extend: 'selected',
+                            action: function ( e, dt, node, config ) {
+                                var rows = dt.rows({selected: true}).data();
+                                post('upg.php', rows );
+                                },
+
+							text: 'Compare to UPG Nations'
+                        },
+                        {
+                            extend: 'selected',
+                            action: function ( e, dt, node, config ) {
+                                var rows = dt.rows( { selected: true } ).data();
+                                post("cultures.php", rows);
+                            },
+                            text: 'Compare Cultures'
+                        }
+                    ],
+
+                    data: dataSet,
+                    columns: [
+                        { title: "Country" },
+                        { title: "Power Distance" },
+                        { title: "Individualism" },
+                        { title: "Masculinity" },
+                        { title: "Uncertainty Avoidance" },
+                        { title: "Long Term Orientation" },
+                        { title: "Indulgence" },
+                        { title: "UPG Nation" },
+                        { title: "Mob Index Nation" },
+                        { title: "Government Restrictions Index (GRI)" },
+                        { title: "Social Hostilities Index (SHI)" },
+                        { title: "Prosperity Rank" },
+                        { title: "Evangelical #s" },
+                        { title: "Current Sending In Country" },
+                        { title: "Current Sending Abroad" },
+                        { title: "% less than 15 years" },
+                        { title: "In Country UPG Access" },
+                        { title: "Regional UPG Access" },
+                        { title: "Median" },
+                        { title: "Geographic Distance" },
+                    ]
+
+                } );
+
+                $('#example tbody').on( 'click', 'tr', function () {
+                    $(this).toggleClass('selected');
+                } );
+
+            } );
+
+        </script>
+	<!--	/* End DataTables Stuff */   -->
+
+        <link rel='dns-prefetch' href='//fast.fonts.net' />
+    <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+    <link rel='dns-prefetch' href='//s.w.org' />
+    <link rel="alternate" type="application/rss+xml" title="Center for Mission Mobilization &raquo; Feed" href="http://www.mobilization.org/feed/" />
+    <link rel="alternate" type="application/rss+xml" title="Center for Mission Mobilization &raquo; Comments Feed" href="http://www.mobilization.org/comments/feed/" />
+    <link rel="alternate" type="application/rss+xml" title="Center for Mission Mobilization &raquo; The Impact of Mobilization Comments Feed" href="http://www.mobilization.org/mobilization/the-impact-of-mobilization/feed/" />
+            <script type="text/javascript">
+                window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/2.2.1\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.mobilization.org\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.7.5"}};
+                !function(a,b,c){function d(a){var b,c,d,e,f=String.fromCharCode;if(!k||!k.fillText)return!1;switch(k.clearRect(0,0,j.width,j.height),k.textBaseline="top",k.font="600 32px Arial",a){case"flag":return k.fillText(f(55356,56826,55356,56819),0,0),!(j.toDataURL().length<3e3)&&(k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,65039,8205,55356,57096),0,0),b=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55356,57331,55356,57096),0,0),c=j.toDataURL(),b!==c);case"emoji4":return k.fillText(f(55357,56425,55356,57341,8205,55357,56507),0,0),d=j.toDataURL(),k.clearRect(0,0,j.width,j.height),k.fillText(f(55357,56425,55356,57341,55357,56507),0,0),e=j.toDataURL(),d!==e}return!1}function e(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i,j=b.createElement("canvas"),k=j.getContext&&j.getContext("2d");for(i=Array("flag","emoji4"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+            </script>
+            <meta content="CMM Divi Child Theme v.1.0.0" name="generator"/><style type="text/css">
+    img.wp-smiley,
+    img.emoji {
+        display: inline !important;
+        border: none !important;
+        box-shadow: none !important;
+        height: 1em !important;
+        width: 1em !important;
+        margin: 0 .07em !important;
+        vertical-align: -0.1em !important;
+        background: none !important;
+        padding: 0 !important;
+    }
+    </style>
+    <link rel='stylesheet' id='PopPop-css'  href='http://www.mobilization.org/wp-content/plugins/poppop/scripts/reveal/reveal.css?ver=0.4' type='text/css' media='all' />
+    <link rel='stylesheet' id='contact-form-7-css'  href='http://www.mobilization.org/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=4.7' type='text/css' media='all' />
+    <link rel='stylesheet' id='tp_twitter_plugin_css-css'  href='http://www.mobilization.org/wp-content/plugins/recent-tweets-widget/tp_twitter_plugin.css?ver=1.0' type='text/css' media='screen' />
+    <link rel='stylesheet' id='cmm-fonts-css'  href='http://fast.fonts.net/cssapi/5fa6796f-6f4a-49be-9a03-dc7fd883437f.css' type='text/css' media='all' />
+    <link rel='stylesheet' id='divi-fonts-css'  href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,800italic,400,300,700,800&#038;subset=latin,latin-ext' type='text/css' media='all' />
+    <link rel='stylesheet' id='divi-style-css'  href='http://www.mobilization.org/wp-content/themes/Divi-child/style.css?ver=2.1.4' type='text/css' media='all' />
+    <link rel='stylesheet' id='et-shortcodes-css-css'  href='http://www.mobilization.org/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes.css?ver=3.0' type='text/css' media='all' />
+    <link rel='stylesheet' id='et-shortcodes-responsive-css-css'  href='http://www.mobilization.org/wp-content/themes/Divi/epanel/shortcodes/css/shortcodes_responsive.css?ver=3.0' type='text/css' media='all' />
+    <!-- This site uses the Google Analytics by MonsterInsights plugin v6.1.10 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script type="text/javascript" data-cfasync="false">
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	var disableStr = 'ga-disable-UA-47172799-1';
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+	__gaTracker('create', 'UA-47172799-1', 'auto');
+	__gaTracker('set', 'forceSSL', true);
+	__gaTracker('send','pageview');
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+<script type='text/javascript' src='http://www.mobilization.org/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+	<script type='text/javascript' src='https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js'></script>					//DataTables Script
+	<script type='text/javascript' src='https://cdn.datatables.net/select/1.2.2/js/dataTables.select.min.js'></script>				//DataTables Script
+<link rel='https://api.w.org/' href='http://www.mobilization.org/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.mobilization.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.mobilization.org/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.7.5" />
+<link rel="canonical" href="http://www.mobilization.org/mobilization/the-impact-of-mobilization/" />
+<link rel='shortlink' href='http://www.mobilization.org/?p=432' />
+<link rel="alternate" type="application/json+oembed" href="http://www.mobilization.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.mobilization.org%2Fmobilization%2Fthe-impact-of-mobilization%2F" />
+<link rel="alternate" type="text/xml+oembed" href="http://www.mobilization.org/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.mobilization.org%2Fmobilization%2Fthe-impact-of-mobilization%2F&#038;format=xml" />
+<link type="text/css" rel="stylesheet" href="http://fast.fonts.net/cssapi/5fa6796f-6f4a-49be-9a03-dc7fd883437f.css"/><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />	<style>
+		a { color: #ffb134; }
+
+		body { color: #000000; }
+
+		.et_pb_counter_amount, .et_pb_featured_table .et_pb_pricing_heading, .et_quote_content, .et_link_content, .et_audio_content { background-color: #626b63; }
+
+		#main-header, #main-header .nav li ul, .et-search-form, #main-header .et_mobile_menu { background-color: #ffffff; }
+
+		#top-header, #et-secondary-nav li ul { background-color: #dde3dc; }
+
+		.woocommerce a.button.alt, .woocommerce-page a.button.alt, .woocommerce button.button.alt, .woocommerce-page button.button.alt, .woocommerce input.button.alt, .woocommerce-page input.button.alt, .woocommerce #respond input#submit.alt, .woocommerce-page #respond input#submit.alt, .woocommerce #content input.button.alt, .woocommerce-page #content input.button.alt, .woocommerce a.button, .woocommerce-page a.button, .woocommerce button.button, .woocommerce-page button.button, .woocommerce input.button, .woocommerce-page input.button, .woocommerce #respond input#submit, .woocommerce-page #respond input#submit, .woocommerce #content input.button, .woocommerce-page #content input.button, .woocommerce-message, .woocommerce-error, .woocommerce-info { background: #626b63 !important; }
+
+		#et_search_icon:hover, .mobile_menu_bar:before, .footer-widget h4, .et-social-icon a:hover, .comment-reply-link, .form-submit input, .et_pb_sum, .et_pb_pricing li a, .et_pb_pricing_table_button, .et_overlay:before, .entry-summary p.price ins, .woocommerce div.product span.price, .woocommerce-page div.product span.price, .woocommerce #content div.product span.price, .woocommerce-page #content div.product span.price, .woocommerce div.product p.price, .woocommerce-page div.product p.price, .woocommerce #content div.product p.price, .woocommerce-page #content div.product p.price, .et_pb_member_social_links a:hover { color: #626b63 !important; }
+
+		/* Changes by CMM (Ian Fraiser) */
+		.woocommerce .star-rating span:before, .woocommerce-page .star-rating span:before, .et_pb_widget li a:hover, /*.et_pb_bg_layout_light .et_pb_promo_button,*/ .et_pb_bg_layout_light .et_pb_more_button, .et_pb_filterable_portfolio .et_pb_portfolio_filters li a.active, .et_pb_filterable_portfolio .et_pb_portofolio_pagination ul li a.active, .et_pb_gallery .et_pb_gallery_pagination ul li a.active, .wp-pagenavi span.current, .wp-pagenavi a:hover, .et_pb_contact_submit, .et_pb_bg_layout_light .et_pb_newsletter_button, .nav-single a, .posted_in a { color: #626b63 !important; }
+		/* end Changes by CMM (Ian Fraiser) */
+		
+		.et-search-form, .nav li ul, .et_mobile_menu, .footer-widget li:before, .et_pb_pricing li:before, blockquote { border-color: #626b63; }
+
+		#main-footer { background-color: #2f2f2a; }
+
+		#top-menu a { color: #000000; }
+
+		#top-menu li.current-menu-ancestor > a, #top-menu li.current-menu-item > a, .bottom-nav li.current-menu-item > a { color: #ffb134; }
+
+		</style>
+</head>
+<body class="page-template-default page page-id-432 page-child parent-pageid-458 et_fixed_nav et_cover_background et_secondary_nav_enabled windows et_pb_pagebuilder_layout et_right_sidebar ie et_includes_sidebar">
+	<div id="page-container">
+
+			<div id="top-header" class="et_nav_text_color_dark">
+			<div class="container clearfix">
+
+			
+				<div id="et-secondary-menu">
+				<ul class="et-social-icons">
+
+	<li class="et-social-icon et-social-facebook">
+		<a href="https://www.facebook.com/missionmobilization" class="icon">
+			<span>Facebook</span>
+		</a>
+	</li>
+	<li class="et-social-icon et-social-twitter">
+		<a href="https://twitter.com/CMMobilization" class="icon">
+			<span>Twitter</span>
+		</a>
+	</li>
+
+</ul>
+				</div> <!-- #et-secondary-menu -->
+
+			</div> <!-- .container -->
+		</div> <!-- #top-header -->
+	
+		<header id="main-header" class="et_nav_text_color_dark">
+			<div class="container clearfix">
+							<a href="http://www.mobilization.org/">
+					<img src="http://www.mobilization.org/wp-content/themes/Divi-child/images/cmm2.png" alt="Center for Mission Mobilization" id="logo" />
+				</a>
+				<!-- #et-top-navigation -->
+			</div> <!-- .container -->
+
+			<!-- Banner for URL parameter when redirected from 79online.org -->
+						
+		</header> <!-- #main-header -->
+
+		
+		<div id="et-main-area">
+<div id="main-content">
+
+
+			
+				<article id="post-432" class="post-432 page type-page status-publish hentry">
+
+				
+					<div class="entry-content">
+					<div class="et_pb_section et_pb_fullwidth_section et_section_regular" style='background-color:#ffffff;'>
+			
+			
+				
+				<div class="et_pb_fullwidth_menu et_pb_bg_layout_light et_pb_text_align_center section_menu" style="background-color: #dde3dc;">
+			<div class="et_pb_row clearfix">
+
+				<div id="et_mobile_nav_menu">
+					<a href="#" class="mobile_nav closed">
+						<span class="mobile_menu_bar"></span>
+					</a>
+				</div>
+			</div>
+		</div><section class="et_pb_fullwidth_header et_pb_bg_layout_light et_pb_text_align_center page_head">
+			<div class="et_pb_row">
+				<h1>Comparisons</h1>
+
+				<table id="example" class="display dataTable no-footer" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+				</table>
+
+			</div>
+		</section>
+			
+		</div> <!-- .et_pb_section --><div class="et_pb_section image_bottom section_head et_section_regular">
+			
+			
+				
+				<div class="et_pb_row">
+			<div class="et_pb_column et_pb_column_4_4">
+			<div id="upg" class="et_pb_text et_pb_bg_layout_light et_pb_text_align_center">
+			
+<h2>Compare cultural data for a country to all UPG nations</h2>
+				<p>UPG chart jumps to here when selected</p>
+
+		</div> <!-- .et_pb_text -->
+		</div> <!-- .et_pb_column -->
+		</div> <!-- .et_pb_row -->
+
+						<div class="et_pb_row">
+							<div class="et_pb_column et_pb_column_4_4">
+								<div id="multi" class="et_pb_text et_pb_bg_layout_light et_pb_text_align_center">
+
+									<h2>Compare cultural data for 2 (or more) countries</h2>
+									<p>multi county compare jumps to here when selected</p>
+
+								</div> <!-- .et_pb_text -->
+							</div> <!-- .et_pb_column -->
+						</div> <!-- .et_pb_row -->
+
+
+			
+		</div> <!-- .et_pb_section --><div id="impact_bottom" class="et_pb_section border_vert image_bottom et_section_regular" style='background-image:url(http://www.mobilization.org/wp-content/uploads/2014/07/Addis-3.jpg);'>
+			
+			
+				
+
+		</div> <!-- .et_pb_section -->
+					</div> <!-- .entry-content -->
+
+				
+				</article> <!-- .et_pb_post -->
+
+			
+
+</div> <!-- #main-content -->
+
+
+			<footer id="main-footer">
+
+		
+				<div id="et-footer-nav">
+					<div class="container">
+						<ul class="et-social-icons">
+
+	<li class="et-social-icon et-social-facebook">
+		<a href="https://www.facebook.com/missionmobilization" class="icon">
+			<span>Facebook</span>
+		</a>
+	</li>
+	<li class="et-social-icon et-social-twitter">
+		<a href="https://twitter.com/CMMobilization" class="icon">
+			<span>Twitter</span>
+		</a>
+	</li>
+
+</ul>						
+						<ul id="menu-footer" class="bottom-nav"><li id="menu-item-660" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-660"><a href="http://www.mobilization.org/about/our-story/">Our Story</a></li>
+<li id="menu-item-659" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-659"><a href="http://www.mobilization.org/about/leadership/">Leadership</a></li>
+<li id="menu-item-658" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-658"><a href="http://www.mobilization.org/about/beliefs/">Beliefs</a></li>
+<li id="menu-item-800" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-800"><a href="http://www.mobilization.org/contact/">Contact</a></li>
+<li id="menu-item-799" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-799"><a href="http://www.mobilization.org/join/">Join</a></li>
+</ul>					</div>					
+				</div> <!-- #et-footer-nav -->
+
+				
+<div class="container">
+	<div id="footer-widgets" class="clearfix">
+	<div class="footer-widget"><div id="nav_menu-4" class="fwidget et_pb_widget widget_nav_menu"><h4 class="title">Ministry Websites</h4><div class="menu-ministry-websites-container"><ul id="menu-ministry-websites" class="menu"><li id="menu-item-216" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-216"><a href="http://weavefamily.org" onclick="__gaTracker('send', 'event', 'outbound-menu', 'http://weavefamily.org', 'weavefamily.org');" target="_blank">weavefamily.org</a></li>
+<li id="menu-item-217" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-217"><a href="http://supportraisingsolutions.org" onclick="__gaTracker('send', 'event', 'outbound-menu', 'http://supportraisingsolutions.org', 'supportraisingsolutions.org');" target="_blank">supportraisingsolutions.org</a></li>
+<li id="menu-item-218" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-218"><a href="http://campusministry.org" onclick="__gaTracker('send', 'event', 'outbound-menu', 'http://campusministry.org', 'campusministry.org');" target="_blank">campusministry.org</a></li>
+<li id="menu-item-2076" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2076"><a href="http://cmmpress.org/">cmmpress.org</a></li>
+</ul></div></div> <!-- end .fwidget --></div> <!-- end .footer-widget --><div class="footer-widget"><div id="text-3" class="fwidget et_pb_widget widget_text"><h4 class="title">Center for Mission Mobilization</h4>			<div class="textwidget"><p><span style="line-height:1.5em; display: block;">PO Box 3556<br />
+Fayetteville, AR 72702<br />
+<a href="mailto:info@mobilization.org">info@mobilization.org</a><br />
+800-595-4881</span></p>
+</div>
+		</div> <!-- end .fwidget --></div> <!-- end .footer-widget --><div class="footer-widget last"><div id="text-4" class="fwidget et_pb_widget widget_text">			<div class="textwidget"><p><span style="font-size:12px; line-height:1.33em; display: block;">© 2014 Center for Mission Mobilization. All rights reserved.</span></p>
+<p><span style="font-size:12px; line-height:1.33em; display: block;">The Center for Mission Mobilization is a 501c3, non-profit organization, EIN 71-0861654. Our finances are reviewed by an independent board of directors and Capin Crouse, a leader of financial accounting for non-profits and ministries.</span></p>
+<p><a href="/privacy-policy/ ">Privacy Policy</a></p>
+</div>
+		</div> <!-- end .fwidget --></div> <!-- end .footer-widget -->	</div> <!-- #footer-widgets -->
+</div>	<!-- .container -->
+			
+			</footer> <!-- #main-footer -->
+		</div> <!-- #et-main-area -->
+
+
+	</div> <!-- #page-container -->
+
+	<script type='text/javascript' src='http://www.mobilization.org/wp-content/plugins/poppop/scripts/reveal/jquery-reveal.js?ver=0.4'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"recaptcha":{"messages":{"empty":"Please verify that you are not a robot."}}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.7'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-includes/js/comment-reply.min.js?ver=4.7.5'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/themes/Divi/js/jquery.fitvids.js?ver=2.1.4'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/themes/Divi/js/waypoints.min.js?ver=2.1.4'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/themes/Divi/js/jquery.magnific-popup.js?ver=2.1.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var et_custom = {"ajaxurl":"http:\/\/www.mobilization.org\/wp-admin\/admin-ajax.php","images_uri":"http:\/\/www.mobilization.org\/wp-content\/themes\/Divi\/images","et_load_nonce":"9922625c53","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","fill":"Fill","field":"field","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","next":"Next"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-content/themes/Divi/js/custom.js?ver=2.1.4'></script>
+<script type='text/javascript' src='http://www.mobilization.org/wp-includes/js/wp-embed.min.js?ver=4.7.5'></script>
+		<div id="text-7" class="reveal-modal widget_text">
+									<div class="textwidget"><h4>Please provide this information to receive your free resource.</h4>
+
+<div role="form" class="wpcf7" id="wpcf7-f1552-o1" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/mobilization/the-impact-of-mobilization/#wpcf7-f1552-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1552" />
+<input type="hidden" name="_wpcf7_version" value="4.7" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1552-o1" />
+<input type="hidden" name="_wpnonce" value="483de3a4dc" />
+</div>
+<p>First name * <span class="wpcf7-form-control-wrap first-name"><input type="text" name="first-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Last name * <span class="wpcf7-form-control-wrap last-name"><input type="text" name="last-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Email * <span class="wpcf7-form-control-wrap email"><input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" /></span></p>
+<p>City * <span class="wpcf7-form-control-wrap city"><input type="text" name="city" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Country * <span class="wpcf7-form-control-wrap countrylist"><select name="countrylist" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false"><option value="USA">USA</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Arctic Ocean">Arctic Ocean</option><option value="Aruba">Aruba</option><option value="Ashmore and Cartier Islands">Ashmore and Cartier Islands</option><option value="Atlantic Ocean">Atlantic Ocean</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Baker Island">Baker Island</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Bassas da India">Bassas da India</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Clipperton Island">Clipperton Island</option><option value="Cocos Islands">Cocos Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Cook Islands">Cook Islands</option><option value="Coral Sea Islands">Coral Sea Islands</option><option value="Costa Rica">Costa Rica</option><option value="Cote d&#039;Ivoire">Cote d&#039;Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="East Timor">East Timor</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Europa Island">Europa Island</option><option value="Falkland Islands (Islas Malvinas)">Falkland Islands (Islas Malvinas)</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern and Antarctic Lands">French Southern and Antarctic Lands</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Gaza Strip">Gaza Strip</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Glorioso Islands">Glorioso Islands</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Howland Island">Howland Island</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indian Ocean">Indian Ocean</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Jan Mayen">Jan Mayen</option><option value="Japan">Japan</option><option value="Jarvis Island">Jarvis Island</option><option value="Jersey">Jersey</option><option value="Johnston Atoll">Johnston Atoll</option><option value="Jordan">Jordan</option><option value="Juan de Nova Island">Juan de Nova Island</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kingman Reef">Kingman Reef</option><option value="Kiribati">Kiribati</option><option value="Kerguelen Archipelago">Kerguelen Archipelago</option><option value="Kosovo">Kosovo</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macau">Macau</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Midway Islands">Midway Islands</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Navassa Island">Navassa Island</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="Netherlands Antilles">Netherlands Antilles</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="North Korea">North Korea</option><option value="North Sea">North Sea</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pacific Ocean">Pacific Ocean</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palmyra Atoll">Palmyra Atoll</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paracel Islands">Paracel Islands</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn Islands">Pitcairn Islands</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Reunion">Reunion</option><option value="Republic of the Congo">Republic of the Congo</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="South Korea">South Korea</option><option value="Spain">Spain</option><option value="Spratly Islands">Spratly Islands</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard">Svalbard</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tromelin Island">Tromelin Island</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Venezuela">Venezuela</option><option value="Viet Nam">Viet Nam</option><option value="Virgin Islands">Virgin Islands</option><option value="Wake Island">Wake Island</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="West Bank">West Bank</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Yugoslavia">Yugoslavia</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select></span><br />
+<span class="wpcf7-form-control-wrap teammember"><input type="text" name="teammember" value="Titus Hofer" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" /></span><span class="wpcf7-form-control-wrap teammemberemail"><input type="email" name="teammemberemail" value="titus.hofer@mobilization.org" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email" aria-invalid="false" /></span></p>
+<p>Phone / WhatsApp number (optional) <span class="wpcf7-form-control-wrap phone"><input type="tel" name="phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel" aria-invalid="false" /></span></p>
+<p>Comments <span class="wpcf7-form-control-wrap comments"><input type="text" name="comments" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" /></span></p>
+<p>Choose language <span class="wpcf7-form-control-wrap language"><select name="language" class="wpcf7-form-control wpcf7-select" id="lang" aria-invalid="false"><option value="English">English</option><option value="Amharic">Amharic</option><option value="Chinese">Chinese</option><option value="Portuguese">Portuguese</option><option value="Russian">Russian</option><option value="Spanish">Spanish</option><option value="Ukranian">Ukranian</option><option value="French">French</option><option value="Vietnamese">Vietnamese</option></select></span></p>
+<input type="hidden" name="hidden-595" value="The Impact of Mobilization" class="wpcf7-form-control wpcf7-hidden" />
+<p><input type="submit" value="Download PDF" class="wpcf7-form-control wpcf7-submit" /></p>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div>
+					<a class="close-reveal-modal">&#215;</a>
+		</div>
+			<div id="text-8" class="reveal-modal widget_text">
+									<div class="textwidget"><h4>Please provide this information to receive your free resource.</h4>
+
+<div role="form" class="wpcf7" id="wpcf7-f1997-o2" lang="en-US" dir="ltr">
+<div class="screen-reader-response"></div>
+<form action="/mobilization/the-impact-of-mobilization/#wpcf7-f1997-o2" method="post" class="wpcf7-form" novalidate="novalidate">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="1997" />
+<input type="hidden" name="_wpcf7_version" value="4.7" />
+<input type="hidden" name="_wpcf7_locale" value="en_US" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f1997-o2" />
+<input type="hidden" name="_wpnonce" value="2e9d85da7c" />
+</div>
+<p>First name * <span class="wpcf7-form-control-wrap first-name"><input type="text" name="first-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Last name * <span class="wpcf7-form-control-wrap last-name"><input type="text" name="last-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Email * <span class="wpcf7-form-control-wrap email"><input type="email" name="email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email" aria-required="true" aria-invalid="false" /></span></p>
+<p>City * <span class="wpcf7-form-control-wrap city"><input type="text" name="city" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" aria-invalid="false" /></span></p>
+<p>Country * <span class="wpcf7-form-control-wrap countrylist"><select name="countrylist" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false"><option value="USA">USA</option><option value="Afghanistan">Afghanistan</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Arctic Ocean">Arctic Ocean</option><option value="Aruba">Aruba</option><option value="Ashmore and Cartier Islands">Ashmore and Cartier Islands</option><option value="Atlantic Ocean">Atlantic Ocean</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Baker Island">Baker Island</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Bassas da India">Bassas da India</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Clipperton Island">Clipperton Island</option><option value="Cocos Islands">Cocos Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Cook Islands">Cook Islands</option><option value="Coral Sea Islands">Coral Sea Islands</option><option value="Costa Rica">Costa Rica</option><option value="Cote d&#039;Ivoire">Cote d&#039;Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Democratic Republic of the Congo">Democratic Republic of the Congo</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="East Timor">East Timor</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Europa Island">Europa Island</option><option value="Falkland Islands (Islas Malvinas)">Falkland Islands (Islas Malvinas)</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern and Antarctic Lands">French Southern and Antarctic Lands</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Gaza Strip">Gaza Strip</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Glorioso Islands">Glorioso Islands</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong">Hong Kong</option><option value="Howland Island">Howland Island</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indian Ocean">Indian Ocean</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Jan Mayen">Jan Mayen</option><option value="Japan">Japan</option><option value="Jarvis Island">Jarvis Island</option><option value="Jersey">Jersey</option><option value="Johnston Atoll">Johnston Atoll</option><option value="Jordan">Jordan</option><option value="Juan de Nova Island">Juan de Nova Island</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kingman Reef">Kingman Reef</option><option value="Kiribati">Kiribati</option><option value="Kerguelen Archipelago">Kerguelen Archipelago</option><option value="Kosovo">Kosovo</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macau">Macau</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Midway Islands">Midway Islands</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar">Myanmar</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Navassa Island">Navassa Island</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="Netherlands Antilles">Netherlands Antilles</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="North Korea">North Korea</option><option value="North Sea">North Sea</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pacific Ocean">Pacific Ocean</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palmyra Atoll">Palmyra Atoll</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paracel Islands">Paracel Islands</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn Islands">Pitcairn Islands</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Puerto Rico">Puerto Rico</option><option value="Qatar">Qatar</option><option value="Reunion">Reunion</option><option value="Republic of the Congo">Republic of the Congo</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="Sao Tome and Principe">Sao Tome and Principe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="South Korea">South Korea</option><option value="Spain">Spain</option><option value="Spratly Islands">Spratly Islands</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard">Svalbard</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tromelin Island">Tromelin Island</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="Uruguay">Uruguay</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Venezuela">Venezuela</option><option value="Viet Nam">Viet Nam</option><option value="Virgin Islands">Virgin Islands</option><option value="Wake Island">Wake Island</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="West Bank">West Bank</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Yugoslavia">Yugoslavia</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select></span><br />
+<span class="wpcf7-form-control-wrap teammember"><input type="text" name="teammember" value="Titus Hofer" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" /></span><span class="wpcf7-form-control-wrap teammemberemail"><input type="email" name="teammemberemail" value="titus.hofer@mobilization.org" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email" aria-invalid="false" /></span></p>
+<p>Phone / WhatsApp number (optional) <span class="wpcf7-form-control-wrap phone"><input type="tel" name="phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel" aria-invalid="false" /></span></p>
+<p>Comments <span class="wpcf7-form-control-wrap comments"><input type="text" name="comments" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" /></span></p>
+<p>Choose language <span class="wpcf7-form-control-wrap language"><select name="language" class="wpcf7-form-control wpcf7-select" id="lang" aria-invalid="false"><option value="English">English</option><option value="Portuguese">Portuguese</option><option value="Russian">Russian</option><option value="Simplified Chinese">Simplified Chinese</option><option value="French">French</option><option value="Amharic">Amharic</option></select></span></p>
+<input type="hidden" name="hidden-595" value="The Impact of Mobilization" class="wpcf7-form-control wpcf7-hidden" />
+<p><input type="submit" value="Download PDF" class="wpcf7-form-control wpcf7-submit" /></p>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div>
+					<a class="close-reveal-modal">&#215;</a>
+		</div>
+		<script>
+		var refTagger = {
+			settings: {
+				bibleVersion: "ESV",
+				dropShadow: false,			
+				socialSharing: ["twitter","facebook","google"],
+				tooltipStyle: "dark",
+				noSearchClassNames: ["bbom_sec"],
+				customStyle : {
+					heading: {
+						backgroundColor : "#8c9b94",
+						color : "#4a514b"
+					},
+					body   : {
+						color: "#283531",
+						moreLink : {
+							color: "#ffb134"
+						}
+					}
+				}
+			}
+		};
+		(function(d, t) {
+			var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+			g.src = "//api.reftagger.com/v2/RefTagger.js";
+			s.parentNode.insertBefore(g, s);
+		}(document, "script"));
+	</script>
+</body>
+</html>
