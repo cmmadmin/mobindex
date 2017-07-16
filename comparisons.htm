@@ -29,7 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="scripts/datatables.min.css"/>
 
 	<script type="text/javascript" src="scripts/datatables.min.js"></script>
-	<!--
+<!--
 		DEV NOTES:
 		Required for DataTables to work:
 		datatables.min.css			provides base functionality for appearance
@@ -68,14 +68,58 @@
 
             $(document).ready(function() {
                 $('#example').DataTable( {
-               "ajax": "scripts/dh_svr_process.php",
-
+                   "ajax": "scripts/dh_svr_process.php",
                    "scrollX": true,
                     dom: 'Bfrtip',
-               
-                    select: {
-                        style: 'multi'
-                    },
+                    select: {style: 'multi'},
+                    columns: [
+                        { "data": 0, title: "Country" },											/* data source = 0 */
+                        { "data": 1, title: "Power Distance" },										/* data source = 1 */
+                        { "data": 2, title: "Individualism" },										/* data source = 2 */
+                        { "data": 3, title: "Masculinity" },										/* data source = 3 */
+                        { "data": 4, title: "Uncertainty Avoidance" },								/* data source = 4 */
+                        { "data": 5, title: "Long Term Orientation" },								/* data source = 5 */
+                        { "data": 6, title: "Indulgence" },											/* data source = 6 */
+                        { "data": 7, title: "UPG Nation" },											/* data source = 7 */
+                        { "data": 8, title: "Mob Index Nation" },									/* data source = 8 */
+                        { "data": 1, title: "Average Median Cultural Distance to UPG's"},			/* data source = calculated TBE*/
+                        { "data": 1, title: "Religious Freedoms"},									/* data source = calc from 9&10 */
+                        { "data": 9, title: "Government Restrictions Index (GRI)" },				/* data source = 9 */
+                        { "data": 10, title: "Social Hostilities Index (SHI)" },					/* data source = 10 */
+                        { "data": 11, title: "Prosperity Rank" },									/* data source = 11 */
+                        { "data": 12, title: "Evangelical #s" },									/* data source = 12 */
+                        { "data": 13, title: "Current Sending In Country" },						/* data source = 13 */
+                        { "data": 14, title: "Current Sending Abroad" },							/* data source = 14 */
+                        { "data": 15, title: "% less than 15 years" },								/* data source = 15 */
+                        { "data": 16, title: "In Country UPG Access" },								/* data source = 16 */
+                        { "data": 17, title: "Regional UPG Access" }								/* data source = 17 */
+					],
+
+					"columnDefs": [
+						{
+						    "targets": [ 7, 8, 11, 12 ],
+							"visible": false
+						},
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function ( data, type, row ) {
+                                return 'calculate';
+                            },
+                            "targets": 9
+                        },
+                        {
+                            // Assuming Rel Freedoms is the 10th column,
+							// result is (GRI*.66667) + (SHI*.33333)
+							// if data9 or data10 are not blank, return value- else return null
+                            "render": function ( data, type, row ) {
+                                return row[9] != null && row[10] != null ? (row[9]*.6667)+(row[10]*.33333) + '(' + row[9] + ' & ' + row[10] + ')' : "null";
+                            },
+                            "targets": 10
+                        },
+
+					],
 
                     buttons: [
                         {
@@ -104,30 +148,6 @@
                             },
                             text: 'Compare Cultures'
                         }
-                    ],
-
-                    columns: [
-                        { title: "Country" },
-                        { title: "Power Distance" },
-                        { title: "Individualism" },
-                        { title: "Masculinity" },
-                        { title: "Uncertainty Avoidance" },
-                        { title: "Long Term Orientation" },
-                        { title: "Indulgence" },
-                        { title: "UPG Nation" },
-                        { title: "Mob Index Nation" }
-                        //columns removed for test...
-                     /*   { title: "Government Restrictions Index (GRI)" },
-                        { title: "Social Hostilities Index (SHI)" },
-                        { title: "Prosperity Rank" },
-                        { title: "Evangelical #s" },
-                        { title: "Current Sending In Country" },
-                        { title: "Current Sending Abroad" },
-                        { title: "% less than 15 years" },
-                        { title: "In Country UPG Access" },
-                        { title: "Regional UPG Access" },
-                        { title: "Median" },
-                        { title: "Geographic Distance" }, */
                     ]
 
                 } );
