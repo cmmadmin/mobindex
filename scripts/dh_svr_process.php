@@ -37,7 +37,16 @@ $columns = array(
     array( 'db' => 'Long Term Orientation', 'dt' => 5 ),
     array( 'db' => 'Indulgence', 'dt' => 6 ),
     array( 'db' => 'UPG Nation', 'dt' => 7 ),
-    array( 'db' => 'Mob Index Nation', 'dt' => 8 )
+    array( 'db' => 'Mob Index Nation', 'dt' => 8 ),
+    array( 'db' => 'Government Restrictions Index (GRI)', 'dt' => 9 ),
+    array( 'db' => 'Social Hostilities Index (SHI)', 'dt' => 10 ),
+    array( 'db' => 'Prosperity Rank', 'dt' => 11 ),
+    array( 'db' => 'Evangelical #s', 'dt' => 12 ),
+    array( 'db' => 'Current Sending In Country', 'dt' => 13 ),
+    array( 'db' => 'Current Sending Abroad', 'dt' => 14 ),
+    array( 'db' => '% less than 15 years', 'dt' => 15 ),
+    array( 'db' => 'In Country UPG Access', 'dt' => 16 ),
+    array( 'db' => 'Regional UPG Access', 'dt' => 17 )
 );
  
 // SQL server connection information

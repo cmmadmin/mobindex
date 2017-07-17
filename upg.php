@@ -16,14 +16,8 @@
  </head>
  <body>
 
-<p>Compare UPG</p>
-
-            <?php
-		$Country = array_column($_POST,null);
-		echo "<p>Sending country is ", $Country[0], "</p>";
-            ?>
-
 <!--	/* DataTables Stuff */   -->
+
 <link rel="stylesheet" type="text/css" href="scripts/datatables.min.css"/>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/datatables.min.js"></script>
@@ -39,13 +33,42 @@
     -->
 <script type="text/javascript" class="init">
 
+    var dataSub = <?php
+        $Country = array_column($_POST,null);
+        echo "[", json_encode(explode(",",$Country[0])),"]";  // Opens posted data into js array
+        ?>;
+
     $(document).ready(function() {
+        $('#submitted').DataTable({     //This first table is just for showing submitted row
+            data: dataSub,              //Setup needs to be seperate from the other table in order to prevent
+            "paging": false,            //filtering and other problems from occurring....
+            "scrollX": true,
+            "searching": false,
+
+            columns: [
+                {title: "Country"},
+                {title: "Power Distance"},
+                {title: "Individualism"},
+                {title: "Masculinity"},
+                {title: "Uncertainty Avoidance"},
+                {title: "Long Term Orientation"},
+                {title: "Indulgence"},
+                {title: "Average"}
+            ]
+
+        });
+    });
+    </script>
+
+    <script type="text/javascript" class="init">
+    $(document).ready(function() {
+
         $('#upgcompare').DataTable( {
             "paging": false,
             "info": false,
             "ajax": "scripts/dh_svr_process.php",
             "createdRow": function ( row, data, index ) {
-                if ( data[7] == "no" ) {
+                if ( data[7] != "yes" ) {
                     $('td', row).remove();
                 }
             },
@@ -53,28 +76,17 @@
             "scrollX": true,
 
             columns: [
-                { title: "Country" },
+                { title: "UPG Country" },
                 { title: "Power Distance" },
                 { title: "Individualism" },
                 { title: "Masculinity" },
                 { title: "Uncertainty Avoidance" },
                 { title: "Long Term Orientation" },
                 { title: "Indulgence" },
-                { title: "UPG Nation" },
-                { title: "Mob Index Nation" }
-                //columns removed for test...
-                /*   ,
-                 { title: "Government Restrictions Index (GRI)" },
-                 { title: "Social Hostilities Index (SHI)" },
-                 { title: "Prosperity Rank" },
-                 { title: "Evangelical #s" },
-                 { title: "Current Sending In Country" },
-                 { title: "Current Sending Abroad" },
-                 { title: "% less than 15 years" },
-                 { title: "In Country UPG Access" },
-                 { title: "Regional UPG Access" },
-                 { title: "Median" },
-                 { title: "Geographic Distance" } */
+                { title: "Median" },
+                { title: "Partial Data?" },
+                { title: "Geographic Distance" }
+
             ]
 
         } );
@@ -90,6 +102,18 @@
 <div class="et_pb_row">
     <h1>UPG Comparisons</h1>
 
+<button onclick="goBack()">Return</button>
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+    <p>Sending country:</p>
+    <table id="submitted" class="display dataTable no-footer" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    </table>
+
     <table id="upgcompare" class="display dataTable no-footer" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     </table>
 
@@ -98,12 +122,6 @@
 
  </body>
 
-<button onclick="goBack()">Return</button>
 
-<script>
-function goBack() {
-    window.history.back();
-}
-</script>
 
 </html>
