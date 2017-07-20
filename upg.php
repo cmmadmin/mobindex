@@ -54,7 +54,18 @@
                 {title: "Long Term Orientation"},
                 {title: "Indulgence"},
                 {title: "Average"}
-            ]
+            ],
+
+            "columnDefs": [
+                {
+                    // Average UPG Distance
+                    "render": function ( data, type, row ) {
+                        return "calculate";
+                    },
+                    "targets": 7
+                },
+
+            ],
 
         });
     });
@@ -86,6 +97,76 @@
                 { title: "Median" },
                 { title: "Partial Data?" },
                 { title: "Geographic Distance" }
+
+            ],
+
+            "columnDefs": [
+                {
+                    // Assuming Power Distance is the 1st column, (Name is 0th column)
+                    // result is (row) - (dataSub [0][1])
+                    // if data or dataSub[0][1] are not blank, return value- else return null
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][1] != null && row[1] != null ? Math.abs((dataSub[0][1])-(row[1])) + '(' + dataSub[0][1] + ' & ' + row[1] + ')' : "null";
+                    },
+                    "targets": 1
+                },
+                {
+                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][2] != null && row[2] != null ? Math.abs((dataSub[0][2])-(row[2])) + '(' + dataSub[0][2] + ' & ' + row[2] + ')' : "null";
+                    },
+                    "targets": 2
+                },
+                {
+                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][3] != null && row[3] != null ? Math.abs((dataSub[0][3])-(row[3])) + '(' + dataSub[0][3] + ' & ' + row[3] + ')' : "null";
+                    },
+                    "targets": 3
+                },
+                {
+                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][4] != null && row[4] != null ? Math.abs((dataSub[0][4])-(row[4])) + '(' + dataSub[0][4] + ' & ' + row[4] + ')' : "null";
+                    },
+                    "targets": 4
+                },
+                {
+                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][5] != null && row[5] != null ? Math.abs((dataSub[0][5])-(row[5])) + '(' + dataSub[0][5] + ' & ' + row[5] + ')' : "null";
+                    },
+                    "targets": 5
+                },
+                {
+                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6])
+                    "render": function ( data, type, row ) {
+                        return dataSub[0][6] != null && row[6] != null ? Math.abs((dataSub[0][6])-(row[6])) + '(' + dataSub[0][6] + ' & ' + row[6] + ')' : "null";
+                    },
+                    "targets": 6
+                },
+                {
+                    // Assuming Median is the 7th column, result is (countrymedian) - (dataSub [0][7])
+                    "render": function ( data, type, row ) {
+                        return "calculate";
+                    },
+                    "targets": 7
+                },
+                {
+                    // Assuming Partial Data indicator is the 8th column, result is (countrymedian) - (dataSub [0][7])
+                    "render": function ( data, type, row ) {
+                        return row[1] != null && row[2] != null && row[3] != null && row[4] != null && row[5] != null && row[6] ? "" : "Partial Data";
+                    },
+                    "targets": 8
+                },
+
+                {
+                    // Assuming Partial Data indicator is the 8th column, result is (countrymedian) - (dataSub [0][7])
+                    "render": function ( data, type, row ) {
+                        return "No Data";
+                    },
+                    "targets": 9
+                }
 
             ]
 
