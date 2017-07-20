@@ -12,6 +12,14 @@
              font-weight: bold;
              color: blue;
          }
+         td.low {
+             font-weight: bold;
+             color: green;
+         }
+         td.high {
+             font-weight: bold;
+             color: red;
+         }
      </style>
  </head>
  <body>
@@ -38,10 +46,22 @@
         echo "[", json_encode(explode(",",$Country[0])),"]";  // Opens posted data into js array
         ?>;
 
+    // offline test data :[["Albania","75","20","80","70","61","15","no","no","","","74","","","","","",""]];
+            /* offline test data :var dataSet = [
+        ["Albania","88","20","80","70","61","15","yse","no",null,null,"74",null,null,null,null,null,null],
+        ["Angola","83","18","20","60","15","83","yes","yes","0.56","0.29","141","4","70","25","0.48","308000","76200000"],
+        ["Argentina","49","46","56","86","20","62","yes","yes","0.2","0.14","49","3500000","120","350","0.25","190000","772000"],
+        ["Australia","36","90","61","51","21","71","yes","yes","0.14","0.14","6","3000000","1600","2200","0.19","739000","1026000"],
+        ["Austria","81","55","79","70","60","63","yes","no",null,null,"15",null,null,null,null,null,null],
+        ["Bangladesh","80","20","55","60","47","20","yes","no",null,null,"114",null,null,null,null,null,null],
+        ["Belgium","65","75","54","94","82","57","yes","no",null,null,"16",null,null,null,null,null,null],
+        ["Zimbabwe",null,null,null,null,null,null,"yes","no",null,null,null,null,null,null,null,null,null]
+    ];      */
+
     $(document).ready(function() {
-        $('#submitted').DataTable({     //This first table is just for showing submitted row
-            data: dataSub,              //Setup needs to be seperate from the other table in order to prevent
-            "paging": false,            //filtering and other problems from occurring....
+        $('#submitted').DataTable({                                     //This first table is just for showing submitted row
+            data: dataSub,                                              //Setup needs to be seperate from the other table in order to prevent
+            "paging": false,                                            //filtering and other problems from occurring....
             "scrollX": true,
             "searching": false,
 
@@ -72,6 +92,7 @@
     </script>
 
     <script type="text/javascript" class="init">
+
     $(document).ready(function() {
 
         $('#upgcompare').DataTable( {
@@ -87,12 +108,12 @@
             "scrollX": true,
 
             columns: [
-                { title: "UPG Country" },
-                { title: "Power Distance" },
-                { title: "Individualism" },
-                { title: "Masculinity" },
+                { title: "UPG Country"},
+                { title: "Power Distance"},
+                { title: "Individualism"},
+                { title: "Masculinity"},
                 { title: "Uncertainty Avoidance" },
-                { title: "Long Term Orientation" },
+                { title: "Long Term Orientation"},
                 { title: "Indulgence" },
                 { title: "Median" },
                 { title: "Partial Data?" },
@@ -100,48 +121,83 @@
 
             ],
 
+            "createdRow": function ( row, data, index ) {
+                if ( dataSub [0][1] == "" || data[1] == null) {}
+                else if ( Math.abs(dataSub[0][1] - data[1]) > 19 ) { $('td', row).eq(1).addClass('high');}
+                else if ( Math.abs(dataSub[0][1] - data[1]) < 11 ) { $('td', row).eq(1).addClass('low'); }
+
+                if ( dataSub [0][2] == "" || data[2] == null) {}
+                else if ( Math.abs(dataSub[0][2] - data[2]) > 19 ) { $('td', row).eq(2).addClass('high');}
+                else if ( Math.abs(dataSub[0][2] - data[2]) < 11 ) { $('td', row).eq(2).addClass('low'); }
+
+                if ( dataSub [0][3] == "" || data[3] == null) {}
+                else if ( Math.abs(dataSub[0][3] - data[3]) > 19 ) { $('td', row).eq(3).addClass('high');}
+                else if ( Math.abs(dataSub[0][3] - data[3]) < 11 ) { $('td', row).eq(3).addClass('low'); }
+
+                if ( dataSub [0][4] == "" || data[4] == null) {}
+                else if ( Math.abs(dataSub[0][4] - data[4]) > 19 ) { $('td', row).eq(4).addClass('high');}
+                else if ( Math.abs(dataSub[0][4] - data[4]) < 11 ) { $('td', row).eq(4).addClass('low'); }
+
+                if ( dataSub [0][5] == "" || data[5] == null) {}
+                else if ( Math.abs(dataSub[0][5] - data[5]) > 19 ) { $('td', row).eq(5).addClass('high');}
+                else if ( Math.abs(dataSub[0][5] - data[5]) < 11 ) { $('td', row).eq(5).addClass('low'); }
+
+                if ( dataSub [0][6] == "" || data[6] == null) {}
+                else if ( Math.abs(dataSub[0][6] - data[6]) > 19 ) { $('td', row).eq(6).addClass('high');}
+                else if ( Math.abs(dataSub[0][6] - data[6]) < 11 ) { $('td', row).eq(6).addClass('low'); }
+
+                if ( dataSub [0][7] == "" || data[7] == null) {}
+                else if ( Math.abs(dataSub[0][7] - data[7]) > 19 ) { $('td', row).eq(7).addClass('high');}
+                else if ( Math.abs(dataSub[0][7] - data[7]) < 11 ) { $('td', row).eq(7).addClass('low'); }
+
+                if ( data[1] == null || data[2] || null || data[3] == null || data[4] == null || data[5] == null || data[6] == null) {
+                    $('td', row).eq(8).addClass('high');
+                }
+
+            },
+
             "columnDefs": [
                 {
                     // Assuming Power Distance is the 1st column, (Name is 0th column)
                     // result is (row) - (dataSub [0][1])
-                    // if data or dataSub[0][1] are not blank, return value- else return null
-                    "render": function ( data, type, row ) {
-                        return dataSub[0][1] != null && row[1] != null ? Math.abs((dataSub[0][1])-(row[1])) + '(' + dataSub[0][1] + ' & ' + row[1] + ')' : "null";
+                    // if data or dataSub[0][1] are not blank, return value- else return null  must use empty string for dataSub
+                    "render": function ( data, type, row, meta ) {
+                        return dataSub[0][1] != "" && row[1] != null ? Math.abs((dataSub[0][1])-(row[1])) + '(' + dataSub[0][1] + ' & ' + row[1] + ')' : "null";
                     },
                     "targets": 1
                 },
                 {
-                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])
+                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])must use empty string for dataSub
                     "render": function ( data, type, row ) {
-                        return dataSub[0][2] != null && row[2] != null ? Math.abs((dataSub[0][2])-(row[2])) + '(' + dataSub[0][2] + ' & ' + row[2] + ')' : "null";
+                        return dataSub[0][2] != "" && row[2] != null ? Math.abs((dataSub[0][2])-(row[2])) + '(' + dataSub[0][2] + ' & ' + row[2] + ')' : "null";
                     },
                     "targets": 2
                 },
                 {
-                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])
+                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])must use empty string for dataSub
                     "render": function ( data, type, row ) {
-                        return dataSub[0][3] != null && row[3] != null ? Math.abs((dataSub[0][3])-(row[3])) + '(' + dataSub[0][3] + ' & ' + row[3] + ')' : "null";
+                        return dataSub[0][3] != "" && row[3] != null ? Math.abs((dataSub[0][3])-(row[3])) + '(' + dataSub[0][3] + ' & ' + row[3] + ')' : "null";
                     },
                     "targets": 3
                 },
                 {
-                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])
+                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])must use empty string for dataSub
                     "render": function ( data, type, row ) {
-                        return dataSub[0][4] != null && row[4] != null ? Math.abs((dataSub[0][4])-(row[4])) + '(' + dataSub[0][4] + ' & ' + row[4] + ')' : "null";
+                        return dataSub[0][4] != "" && row[4] != null ? Math.abs((dataSub[0][4])-(row[4])) + '(' + dataSub[0][4] + ' & ' + row[4] + ')' : "null";
                     },
                     "targets": 4
                 },
                 {
-                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])
+                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])must use empty string for dataSub
                     "render": function ( data, type, row ) {
-                        return dataSub[0][5] != null && row[5] != null ? Math.abs((dataSub[0][5])-(row[5])) + '(' + dataSub[0][5] + ' & ' + row[5] + ')' : "null";
+                        return dataSub[0][5] != "" && row[5] != null ? Math.abs((dataSub[0][5])-(row[5])) + '(' + dataSub[0][5] + ' & ' + row[5] + ')' : "null";
                     },
                     "targets": 5
                 },
                 {
-                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6])
+                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6]) must use empty string for dataSub
                     "render": function ( data, type, row ) {
-                        return dataSub[0][6] != null && row[6] != null ? Math.abs((dataSub[0][6])-(row[6])) + '(' + dataSub[0][6] + ' & ' + row[6] + ')' : "null";
+                        return dataSub[0][6] != "" && row[6] != null ? Math.abs((dataSub[0][6])-(row[6])) + '(' + dataSub[0][6] + ' & ' + row[6] + ')' : "null";
                     },
                     "targets": 6
                 },
