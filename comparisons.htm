@@ -27,7 +27,7 @@
 	</script>
 	<!--	/* DataTables Stuff */   -->
 	<link rel="stylesheet" type="text/css" href="scripts/datatables.min.css"/>
-
+	<script type="text/javascript" src="scripts/math.min.js"></script>
 	<script type="text/javascript" src="scripts/datatables.min.js"></script>
 <!--
 		DEV NOTES:
@@ -38,8 +38,13 @@
 		dh_svr_process.php			provides server interactivity (customized, includes SQL connection/ table id/ primary key/ columns)
 		ssp.class.php				provides server interactivity (baseline)
 
+		Additional Functionalities used:
+		math.min.js					provides math.median(a, b, c, ...) and math.distance([x1, y1], [x2, y2])
+
 		-->
         <script type="text/javascript" class="init">
+
+            var averageUPGmedian = 48.62068966; // Need a live function to provide this data!!
 
             function post(path, params, method) {
                 method = method || "post"; // Set method to post by default if not specified.
@@ -73,51 +78,61 @@
                     dom: 'Bfrtip',
                     select: {style: 'multi'},
                     columns: [
-                        { "data": 0, title: "Country" },											/* data source = 0 */
-                        { "data": 1, title: "Power Distance" },										/* data source = 1 */
-                        { "data": 2, title: "Individualism" },										/* data source = 2 */
-                        { "data": 3, title: "Masculinity" },										/* data source = 3 */
-                        { "data": 4, title: "Uncertainty Avoidance" },								/* data source = 4 */
-                        { "data": 5, title: "Long Term Orientation" },								/* data source = 5 */
-                        { "data": 6, title: "Indulgence" },											/* data source = 6 */
-                        { "data": 7, title: "UPG Nation" },											/* data source = 7 */
-                        { "data": 8, title: "Mob Index Nation" },									/* data source = 8 */
-                        { "data": 1, title: "Average Median Cultural Distance to UPG's"},			/* data source = calculated TBE*/
-                        { "data": 1, title: "Religious Freedoms"},									/* data source = calc from 9&10 */
-                        { "data": 9, title: "Government Restrictions Index (GRI)" },				/* data source = 9 */
-                        { "data": 10, title: "Social Hostilities Index (SHI)" },					/* data source = 10 */
-                        { "data": 11, title: "Prosperity Rank" },									/* data source = 11 */
-                        { "data": 12, title: "Evangelical #s" },									/* data source = 12 */
-                        { "data": 13, title: "Current Sending In Country" },						/* data source = 13 */
-                        { "data": 14, title: "Current Sending Abroad" },							/* data source = 14 */
-                        { "data": 15, title: "% less than 15 years" },								/* data source = 15 */
-                        { "data": 16, title: "In Country UPG Access" },								/* data source = 16 */
-                        { "data": 17, title: "Regional UPG Access" }								/* data source = 17 */
+                        { "data": 0, title: "Country" },											/* table col 0, data source = 0 */
+                        { "data": 1, title: "Power Distance" },										/* table col 1, data source = 1 */
+                        { "data": 2, title: "Individualism" },										/* table col 2, data source = 2 */
+                        { "data": 3, title: "Masculinity" },										/* table col 3, data source = 3 */
+                        { "data": 4, title: "Uncertainty Avoidance" },								/* table col 4, data source = 4 */
+                        { "data": 5, title: "Long Term Orientation" },								/* table col 5, data source = 5 */
+                        { "data": 6, title: "Indulgence" },											/* table col 6, data source = 6 */
+                        { "data": 7, title: "UPG Nation" },											/* hidden table col 7, data source = 7 */
+                        { "data": 8, title: "Mob Index Nation" },									/* hidden table col 8, data source = 8 */
+                        { "data": null, title: "Average Median Cultural Distance to UPG's"},		/* table col 9, data source = calculated TBE, "data" column is placeholder*/
+                        { "data": null, title: "Religious Freedoms"},								/* table col 10, data source = calc from 9&10, "data" column is placeholder */
+                        { "data": 9, title: "Government Restrictions Index (GRI)" },				/* hidden table col 11, data source = 9 */
+                        { "data": 10, title: "Social Hostilities Index (SHI)" },					/* hidden table col 12, data source = 10 */
+                        { "data": 11, title: "Prosperity Rank" },									/* table col 13, data source = 11 */
+                        { "data": 12, title: "Evangelical #s" },									/* table col 14, data source = 12 */
+                        { "data": 13, title: "Current Sending In Country" },						/* table col 15, data source = 13 */
+                        { "data": 14, title: "Current Sending Abroad" },							/* table col 16, data source = 14 */
+                        { "data": 15, title: "% less than 15 years" },								/* table col 17, data source = 15 */
+                        { "data": 16, title: "In Country UPG Access" },								/* table col 18, data source = 16 */
+                        { "data": 17, title: "Regional UPG Access" },								/* table col 19, data source = 17 */
 					],
 
 					"columnDefs": [
 						{
-						    "targets": [ 7, 8, 11, 12 ],
-							"visible": false
+						    "targets": [ 7, 8, 11, 12 ],											// selects table col 7,8,11,12
+							"visible": false														// hide selected columns
 						},
                         {
-                            // The `data` parameter refers to the data for the cell (defined by the
-                            // `data` option, which defaults to the column being worked with, in
-                            // this case `data: 0`.
+                            /*the test version of below is as follows; will display source values
+							 return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ?
+							 row[0] +': ' + math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6])].filter(n => n)  ).toPrecision(4) +
+							 '- UAM= ' +
+							 Math.abs(math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6]) ].filter(n => n) )
+							 - averageUPGmedian ).toPrecision(3)
+							 : null;
+							 */
+
                             "render": function ( data, type, row ) {
-                                return 'calculate';
+                                return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ? (Math.abs(math.median(  [(data[1]),(data[2]),(data[3]),(data[4]),(data[5]),(data[6]) ].filter(n => n) )- averageUPGmedian).toPrecision(4)) : "No Data" ;
+								// return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ? (Math.abs(math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6]) ].filter(n => n) )- averageUPGmedian).toPrecision(4)): "No Data";
+                                //if all 6 columns are null display blank, otherwise show country median minus upg avg median
                             },
                             "targets": 9
                         },
                         {
                             // Assuming Rel Freedoms is the 10th column,
 							// result is (GRI*.66667) + (SHI*.33333)
-							// if data9 or data10 are not blank, return value- else return null
+							// if data9 or data10 are not blank, return value- else return No Data
+							// test version to show values is:
+							// return row[9] != null && row[10] != null ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(6) + '(' + row[9] + ' & ' + row[10] + ')' : "No Data";
                             "render": function ( data, type, row ) {
-                                return row[9] != null && row[10] != null ? (row[9]*.6667)+(row[10]*.33333) + '(' + row[9] + ' & ' + row[10] + ')' : "null";
+                                return row[9] != null && row[10] != null ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(6) : "No Data";
                             },
                             "targets": 10
-                        },
+                        }
 
 					],
 
