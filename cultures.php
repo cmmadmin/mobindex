@@ -34,8 +34,24 @@
 <script type="text/javascript" class="init">
 
     var dataSub = <?php
+
         $Country = array_column($_POST,null);
-        echo "[", json_encode(explode(",",$Country[0])),"]";  // Opens posted data into js array
+        $i = 0;
+        foreach ($Country as $v) {
+            if ($Country[$i] == "[object Object]") { break; }
+            $i++;
+        }
+        unset($v);
+        $count=$i;
+
+    echo "[";
+    for($i=0;$i<$count;$i++) {
+        echo json_encode(explode(",", $Country[$i]));  // Opens posted data into js array
+        if ($i<($count-1)){
+            echo ",";
+        }
+    }
+    echo "]";
         ?>;
 
     $(document).ready(function() {
@@ -51,20 +67,16 @@
                 {title: "Long Term Orientation"},
                 {title: "Indulgence"},
                 {title: "UPG Nation"},
-                {title: "Mob Index Nation"}
-                //columns removed for test...
-                /*   ,
-                 { title: "Government Restrictions Index (GRI)" },
-                 { title: "Social Hostilities Index (SHI)" },
-                 { title: "Prosperity Rank" },
-                 { title: "Evangelical #s" },
-                 { title: "Current Sending In Country" },
-                 { title: "Current Sending Abroad" },
-                 { title: "% less than 15 years" },
-                 { title: "In Country UPG Access" },
-                 { title: "Regional UPG Access" },
-                 { title: "Median" },
-                 { title: "Geographic Distance" } */
+                {title: "Mob Index Nation"},
+                { title: "Government Restrictions Index (GRI)" },
+                { title: "Social Hostilities Index (SHI)" },
+                { title: "Prosperity Rank" },
+                { title: "Evangelical #s" },
+                { title: "Current Sending In Country" },
+                { title: "Current Sending Abroad" },
+                { title: "% less than 15 years" },
+                { title: "In Country UPG Access" },
+                { title: "Regional UPG Access" }
             ]
 
         });
@@ -84,18 +96,6 @@
 
 
 </div>
-
-<?php                   // showme
-$i = 0;
-$Country = array_column($_POST,null);
-foreach ($Country as $v) {
-    echo "Current value of \$Country[$i]: $v.\n";
-    if ($Country[$i] == "[object Object]") { break; }
-    $i++;
-}
-echo "Count is " . $i;
-
-?>;
 
  </body>
 

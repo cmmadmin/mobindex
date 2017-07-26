@@ -37,23 +37,35 @@
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/datatables.min.js"></script>
 <script type="text/javascript" src="scripts/math.min.js"></script>
+<script type="text/javascript" src="scripts/helper.js"></script>
 <!--
-    DEV NOTES:
-    Required for DataTables to work:
-    datatables.min.css			provides base functionality for appearance
-    datatables.min.js			provides base functionality
-    jquery 1.12.4 or higher		provides base functionality
-    dh_svr_process.php			provides server interactivity (customized, includes SQL connection/ table id/ primary key/ columns)
-    ssp.class.php				provides server interactivity (baseline)
+		DEV NOTES:
+		Required for DataTables to work:
+		datatables.min.css			provides base functionality for appearance
+		datatables.min.js			provides base functionality
+		jquery 1.12.4 or higher		provides base functionality
+		dh_svr_process.php			provides server interactivity (customized, includes SQL connection/ table id/ primary key/ columns)
+		ssp.class.php				provides server interactivity (baseline)
 
 		Additional Functionalities used:
 		math.min.js					provides math.median(a, b, c, ...) and math.distance([x1, y1], [x2, y2])
+		helper.js					custom helper for value conversions
 
-    -->
+		-->
 
 <script type="text/javascript" class="init">
 
-    var averageUPGmedian = 48.62068966; // This value needs a live calculation!!
+    // var upgvals needs a import of live data
+    var upgvals = [
+        [80, 20, 55, 60, 47, 20], [94, 52, 32, 28, , ], [70, 15, 50, 55, 27, 18], [80, 20, 66, 30, 87, 24],
+        [70, 25, 45, 80, 7, 4], [70, 20, 65, 55, , ], [77, 48, 56, 40, 1, 26], [78, 14, 46, 48, 62, 38],
+        [58, 41, 43, 59, 14, 40], [95, 30, 70, 85, 25, 17], [13, 54, 47, 81, 38, ], [54, 46, 95, 92, 88, 42],
+        [70, 30, 45, 65, 16, 43], [90, 25, 40, 80, , ], [75, 40, 65, 50, 14, 25], [80, 38, 52, 68, 23, 34],
+        [100, 26, 50, 36, 41, 57], [70, 46, 53, 68, 14, 25], [65, 30, 40, 40, , ], [80, 30, 60, 55, 3, 84],
+        [55, 14, 50, 70, 50, 0], [95, 25, 60, 80, 36, 52], [70, 25, 45, 55, 25, ], [70, 20, 40, 50, , ],
+        [74, 20, 48, 8, 72, 46], [80, 35, 10, 45, 45, ], [80, 35, 52, 60, 30, ], [64, 20, 34, 64, 32, 45],
+        [66, 37, 45, 85, 46, 49], [90, 25, 50, 80, , ]
+    ];
 
     var dataSub = <?php
         $Country = array_column($_POST,null);
@@ -81,36 +93,50 @@
             "searching": false,
 
             columns: [
-                {title: "Country"},
-                {title: "Power Distance"},
-                {title: "Individualism"},
-                {title: "Masculinity"},
-                {title: "Uncertainty Avoidance"},
-                {title: "Long Term Orientation"},
-                {title: "Indulgence"},
-                {title: "Average"}
+                { title: "Country" },											/* table col 0, data source = 0 */
+                { title: "Power Distance" },										/* table col 1, data source = 1 */
+                { title: "Individualism" },										/* table col 2, data source = 2 */
+                { title: "Masculinity" },										/* table col 3, data source = 3 */
+                { title: "Uncertainty Avoidance" },								/* table col 4, data source = 4 */
+                { title: "Long Term Orientation" },								/* table col 5, data source = 5 */
+                { title: "Indulgence" },											/* table col 6, data source = 6 */
+                { title: "Average Median Cultural Distance to UPG's"}		/* table col 9, data source = calculated TBE, "data" column is placeholder*/
+
             ],
 
             "columnDefs": [
                 {
-                    // Average UPG Distance
+
                     "render": function ( data, type, row ) {
-                        return row[1] != '' || row[2] != '' || row[3] != '' || row[4] != '' || row[5] != '' || row[6] != '' ?
-                            (Math.abs(math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6]) ].filter(function(x){  return (x !== ( null || '')); }) )
-                                    - averageUPGmedian )).toPrecision(4) : "No Data";
+                        return row[1] != null && row[2] != null && row[3] != null && row[4] != null && row[5] != null && row[6] != null ?
+                            upgAvgMedianDiff(
+                                [dataSub[0][1] != null ? parseFloat(dataSub[0][1]) : null ,
+                                    dataSub[0][2] != null ? parseFloat(dataSub[0][2]) : null ,
+                                    dataSub[0][3] != null ? parseFloat(dataSub[0][3]) : null ,
+                                    dataSub[0][4] != null ? parseFloat(dataSub[0][4]) : null ,
+                                    dataSub[0][5] != null ? parseFloat(dataSub[0][5]) : null ,
+                                    dataSub[0][6] != null ? parseFloat(dataSub[0][6]) : null ],
+                                upgvals
+                            ) : "No Data";
+
+                        //if all 6 columns are null display "No Data"
+
                     },
                     "targets": 7
                 }
+                ],
 
-            ]
+            "createdRow": function ( row, data, index ) {
+                if (data[7] != null) {
+                    $('td', row).eq(7).addClass('highlight');
+                }
+            }
 
         });
     });
     </script>
 
     <script type="text/javascript" class="init">
-
-         // var averageUPGmedian = 48.62068966;
 
     $(document).ready(function() {
 

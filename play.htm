@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8" />
+	<title>Country Comparisons</title>
+			
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+	<!--	/* DataTables Stuff */   -->
+	<link rel="stylesheet" type="text/css" href="scripts/datatables.min.css"/>
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/datatables.min.js"></script>
+	<script type="text/javascript" src="scripts/math.min.js"></script>
+	<script type="text/javascript" src="scripts/helper.js"></script>
+	<!--
+		DEV NOTES:
+		Required for DataTables to work:
+		datatables.min.css			provides base functionality for appearance
+		datatables.min.js			provides base functionality
+		jquery 1.12.4 or higher		provides base functionality
+		dh_svr_process.php			provides server interactivity (customized, includes SQL connection/ table id/ primary key/ columns)
+		ssp.class.php				provides server interactivity (baseline)
+
+		Additional Functionalities used:
+		math.min.js					provides math.median(a, b, c, ...) and math.distance([x1, y1], [x2, y2])
+
+		-->
+
+        <script type="text/javascript" class="init">
+
+
+
+            // bring in countries.json to var region, doesn't work yet
+			// var region = JSON.parse(/scripts/countries.json');
+			// worst case scenario is to hard code this data- I do not expect it the change...
+			// if hard code, just keep country name, subregion, latlong data
+
+            var averageUPGmedian = 48.62068966;
+
+            // var upgvals needs a import of live data
+            var upgvals = [
+                [80, 20, 55, 60, 47, 20], [94, 52, 32, 28, , ], [70, 15, 50, 55, 27, 18], [80, 20, 66, 30, 87, 24], [70, 25, 45, 80, 7, 4],
+                [70, 20, 65, 55, , ], [78, 14, 46, 48, 62, 38], [58, 41, 43, 59, 14, 40], [95, 30, 70, 85, 25, 17], [13, 54, 47, 81, 38, ],
+                [54, 46, 95, 92, 88, 42], [70, 30, 45, 65, 16, 43], [90, 25, 40, 80, , ], [75, 40, 65, 50, 14, 25], [80, 38, 52, 68, 23, 34],
+                [100, 26, 50, 36, 41, 57], [70, 46, 53, 68, 14, 25], [65, 30, 40, 40, , ], [80, 30, 60, 55, 3, 84], [55, 14, 50, 70, 50, 0],
+                [95, 25, 60, 80, 36, 52], [70, 25, 45, 55, 25, ], [70, 20, 40, 50, , ], [74, 20, 48, 8, 72, 46], [80, 35, 10, 45, 45, ],
+                [80, 35, 52, 60, 30, ], [64, 20, 34, 64, 32, 45], [66, 37, 45, 85, 46, 49], [90, 25, 50, 80, , ]];
+
+            var dataSet = [
+                ["Albania","90","20","80","70","61","15","no","no",null,null,"74",null,null,null,null,null,null],
+				["Angola","83","18","20","60","15","83","no","yes","0.56","0.29","141","4","70","25","0.48","308000","76200000"],
+				["Argentina","49","46","56","86","20","62","no","yes","0.2","0.14","49","3500000","120","350","0.25","190000","772000"],
+				["Australia","36","90","61","51","21","71","no","yes","0.14","0.14","6","3000000","1600","2200","0.19","739000","1026000"],
+				["Austria","11","55","79","70","60","63","no","no",null,null,"15",null,null,null,null,null,null],
+				["Bangladesh","80","20","55","60","47","20","yes","no",null,null,"114",null,null,null,null,null,null],
+				["Belgium","65","75","54","94","82","57","no","no",null,null,"16",null,null,null,null,null,null],
+                ["Brazil","69","38","49","76","44","59","no","yes","0.02","0.37","52","50000000","2000","2200","0.23","118000","772000"],
+				["Zimbabwe",null,null,null,null,null,null,"no","no",null,null,null,null,null,null,null,null,null]
+			];
+
+            function post(path, params, method) {
+                method = method || "post"; // Set method to post by default if not specified.
+
+                // The rest of this code assumes you are not using a library.
+                // It can be made less wordy if you use one.
+                var form = document.createElement("form");
+                form.setAttribute("method", method);
+                form.setAttribute("action", path);
+
+                for(var key in params) {
+                    if(params.hasOwnProperty(key)) {
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type", "hidden");
+                        hiddenField.setAttribute("name", key);
+                        hiddenField.setAttribute("value", params[key]);
+
+                        form.appendChild(hiddenField);
+                    }
+                }
+
+                document.body.appendChild(form);
+                form.submit();
+            }
+
+            $(document).ready(function() {
+                $('#example').DataTable( {
+                    data: dataSet,	/*	"ajax": "scripts/dh_svr_process.php",	*/
+                   "scrollX": true,
+                    dom: 'Bfrtip',
+                    select: {style: 'multi'},
+                    "drawCallback": function( row, data, start, end, display ) {
+                       var api = this.api(), data;
+                       var fdat = api.rows().data();
+
+                        document.getElementById("nupg").innerHTML = "averageUPGmedian = " + averageUPGmedian;
+                        document.getElementById("upgavg").innerHTML = "api.rows().nodes().join(): " + api.rows().nodes().join();
+
+                    },
+                    columns: [
+                        { "data": 0, title: "Country" },											/* col 0, data source = 0 */
+                        { "data": 1, title: "Power Distance" },										/* col 1, data source = 1 */
+                        { "data": 2, title: "Individualism" },										/* col 2, data source = 2 */
+                        { "data": 3, title: "Masculinity" },										/* col 3, data source = 3 */
+                        { "data": 4, title: "Uncertainty Avoidance" },								/* data source = 4 */
+                        { "data": 5, title: "Long Term Orientation" },								/* data source = 5 */
+                        { "data": 6, title: "Indulgence" },											/* data source = 6 */
+                        { "data": 7, title: "UPG Nation" },											/* data source = 7 */
+                        { "data": 8, title: "Mob Index Nation" },									/* data source = 8 */
+                        { "data": null, title: "Average Median Cultural Distance to UPG's"},		/* data source = calculated TBE, "data" column is placeholder*/
+                        { "data": null, title: "Religious Freedoms"},								/* data source = calc from 9&10, "data" column is placeholder */
+                        { "data": 9, title: "Government Restrictions Index (GRI)" },				/* data source = 9 */
+                        { "data": 10, title: "Social Hostilities Index (SHI)" },					/* data source = 10 */
+                        { "data": 11, title: "Prosperity Rank" },									/* data source = 11 */
+                        { "data": 12, title: "Evangelical #s" },									/* data source = 12 */
+                        { "data": 13, title: "Current Sending In Country" },						/* data source = 13 */
+                        { "data": 14, title: "Current Sending Abroad" },							/* data source = 14 */
+                        { "data": 15, title: "% less than 15 years" },								/* data source = 15 */
+                        { "data": 16, title: "In Country UPG Access" },								/* data source = 16 */
+                        { "data": 17, title: "Regional UPG Access" },								/* data source = 17 */
+                        { "data": null, title: "geodistance test"}									/* data source = var region */
+					],
+
+					"columnDefs": [
+						{
+						    "targets": [ 7, 8, 11, 12 ],
+							"visible": false
+						},
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+
+                            "render": function ( data, type, row ) {
+                                return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ?
+								row[0] +': ' + math.median(  [(data[1]),(data[2]),(data[3]),(data[4]),(data[5]),(data[6])].filter(n => n)  ).toPrecision(3) +
+									'- UAM= ' +
+                                Math.abs(math.median(  [(data[1]),(data[2]),(data[3]),(data[4]),(data[5]),(data[6]) ].filter(n => n) )
+								- averageUPGmedian ).toPrecision(3)
+									: null;
+                            },
+                            "targets": 9
+                        },
+                        {
+                            // Assuming Rel Freedoms is the 10th column,
+							// result is (GRI*.66667) + (SHI*.33333)
+							// if data9 or data10 are not blank, return value- else return null
+                            "render": function ( data, type, row ) {
+                                return row[9] != null && row[10] != null ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(3) + '(' + row[9] + ' & ' + row[10] + ')' : "No Data";
+                            },
+                            "targets": 10
+                        },
+                        {
+                            // geodistance test  ----- does not belong in front page
+							// use usa for "sending" in test  ----- not working yet
+
+                            "render": function ( data, type, row ) {
+                                return row[1] != null && row[2] != null && row[3] != null && row[4] != null && row[5] != null && row[6] != null ?
+									upgAvgMedianDiff(
+                                    [data[1] != null ? parseFloat(data[1]) : null ,
+                                    data[2] != null ? parseFloat(data[2]) : null ,
+                                    data[3] != null ? parseFloat(data[3]) : null ,
+                                    data[4] != null ? parseFloat(data[4]) : null ,
+                                    data[5] != null ? parseFloat(data[5]) : null ,
+                                    data[6] != null ? parseFloat(data[6]) : null ],
+									upgvals
+								) : "No Data";
+                                // var region's subregion where country= row[0];
+                            },
+                            "targets": 20
+                        }
+
+					],
+
+                    buttons: [
+                        {
+                            extend: 'selected',
+                            action: function ( e, dt, node, config ) {
+                                var rows = dt.rows({selected: true}).data();
+                                if (dt.rows( { selected: true } ).count() !== 1) {
+                                    alert ('Only 1 country may be selected for this function');
+								}
+                                else {
+                                    post('upg.php', rows );
+                                }
+                                },
+
+							text: 'Compare to UPG Nations'
+                        },
+                        {
+                            extend: 'selected',
+                            action: function ( e, dt, node, config ) {
+                                var rows = dt.rows( { selected: true } ).data();
+                                if (dt.rows( { selected: true } ).count() < 2) {
+                                    alert ('You must select multiple countries for this function');
+                                }
+                                else {
+                                    post("cultures.php", rows);}
+                            },
+                            text: 'Compare Cultures'
+                        }
+                    ]
+
+                } );
+
+                $('#example tbody').on( 'click', 'tr', function () {
+                    $(this).toggleClass('selected');
+                } );
+
+            } );
+
+        </script>
+	<!--	/* End DataTables Stuff */   -->
+
+
+
+</head>
+<body class="page-template-default page page-id-432 page-child parent-pageid-458 et_fixed_nav et_cover_background et_secondary_nav_enabled windows et_pb_pagebuilder_layout et_right_sidebar ie et_includes_sidebar">
+	<div id="page-container">
+		<header id="main-header" class="et_nav_text_color_dark"></header> <!-- #main-header -->
+		<div id="et-main-area">
+<div id="main-content">
+
+
+			<div class="et_pb_row">
+				<h1>Comparisons</h1>
+
+				<table id="example" class="display dataTable no-footer" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+				</table>
+
+			</div>
+		</section>
+	<p id="nupg"> Test nupg:</p>
+	<p id="upgavg"> Test upgavg:</p>
+	<p id="aupg"> Test aupg:</p>
+	<p id="aall"> Test aall:</p>
+	<p>
+		Albania		88	20	80	70	61	15	=19.33
+		Angola		83	18	20	60	15	83	=19.17
+		Argentina	49	46	56	86	20	62	=19.59
+		Australia	36	90	61	51	21	71	=28.48
+		Austria		11	55	79				=29.88
+		Bangladesh	80	20	55	60			=12.34
+		Belgium	    65	75	54	94	82	    =26.81
+		Brazil	    69	38	49	76	44	59  =13.14
+		Zimbabwe:                           =48.62
+	</p>
+			
+</div> <!-- #main-content -->
+
+			<footer id="main-footer">
+			</footer> <!-- #main-footer -->
+		</div> <!-- #et-main-area -->
+
+
+	</div> <!-- #page-container -->
+
+</body>
+</html>

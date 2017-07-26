@@ -29,6 +29,7 @@
 	<link rel="stylesheet" type="text/css" href="scripts/datatables.min.css"/>
 	<script type="text/javascript" src="scripts/math.min.js"></script>
 	<script type="text/javascript" src="scripts/datatables.min.js"></script>
+	<script type="text/javascript" src="scripts/helper.js"></script>
 <!--
 		DEV NOTES:
 		Required for DataTables to work:
@@ -40,17 +41,27 @@
 
 		Additional Functionalities used:
 		math.min.js					provides math.median(a, b, c, ...) and math.distance([x1, y1], [x2, y2])
+		helper.js					custom helper for value conversions
 
 		-->
+
         <script type="text/javascript" class="init">
 
-            var averageUPGmedian = 48.62068966; // Need a live function to provide this data!!
+            // var upgvals needs a import of live data
+            var upgvals = [
+                [80, 20, 55, 60, 47, 20], [94, 52, 32, 28, , ], [70, 15, 50, 55, 27, 18], [80, 20, 66, 30, 87, 24],
+                [70, 25, 45, 80, 7, 4], [70, 20, 65, 55, , ], [77, 48, 56, 40, 1, 26], [78, 14, 46, 48, 62, 38],
+                [58, 41, 43, 59, 14, 40], [95, 30, 70, 85, 25, 17], [13, 54, 47, 81, 38, ], [54, 46, 95, 92, 88, 42],
+                [70, 30, 45, 65, 16, 43], [90, 25, 40, 80, , ], [75, 40, 65, 50, 14, 25], [80, 38, 52, 68, 23, 34],
+                [100, 26, 50, 36, 41, 57], [70, 46, 53, 68, 14, 25], [65, 30, 40, 40, , ], [80, 30, 60, 55, 3, 84],
+                [55, 14, 50, 70, 50, 0], [95, 25, 60, 80, 36, 52], [70, 25, 45, 55, 25, ], [70, 20, 40, 50, , ],
+                [74, 20, 48, 8, 72, 46], [80, 35, 10, 45, 45, ], [80, 35, 52, 60, 30, ], [64, 20, 34, 64, 32, 45],
+                [66, 37, 45, 85, 46, 49], [90, 25, 50, 80, , ]
+            ];
 
             function post(path, params, method) {
                 method = method || "post"; // Set method to post by default if not specified.
 
-                // The rest of this code assumes you are not using a library.
-                // It can be made less wordy if you use one.
                 var form = document.createElement("form");
                 form.setAttribute("method", method);
                 form.setAttribute("action", path);
@@ -73,7 +84,7 @@
 
             $(document).ready(function() {
                 $('#example').DataTable( {
-                   "ajax": "scripts/dh_svr_process.php",
+                   "ajax": "scripts/dh_svr_process.php",	//this line will be changed to reflect modified data source.
                    "scrollX": true,
                     dom: 'Bfrtip',
                     select: {style: 'multi'},
@@ -97,7 +108,7 @@
                         { "data": 14, title: "Current Sending Abroad" },							/* table col 16, data source = 14 */
                         { "data": 15, title: "% less than 15 years" },								/* table col 17, data source = 15 */
                         { "data": 16, title: "In Country UPG Access" },								/* table col 18, data source = 16 */
-                        { "data": 17, title: "Regional UPG Access" },								/* table col 19, data source = 17 */
+                        { "data": 17, title: "Regional UPG Access" }								/* table col 19, data source = 17 */
 					],
 
 					"columnDefs": [
@@ -106,19 +117,21 @@
 							"visible": false														// hide selected columns
 						},
                         {
-                            /*the test version of below is as follows; will display source values
-							 return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ?
-							 row[0] +': ' + math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6])].filter(n => n)  ).toPrecision(4) +
-							 '- UAM= ' +
-							 Math.abs(math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6]) ].filter(n => n) )
-							 - averageUPGmedian ).toPrecision(3)
-							 : null;
-							 */
 
                             "render": function ( data, type, row ) {
-                                return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ? (Math.abs(math.median(  [(data[1]),(data[2]),(data[3]),(data[4]),(data[5]),(data[6]) ].filter(n => n) )- averageUPGmedian).toPrecision(4)) : "No Data" ;
-								// return row[1] != null || row[2] != null || row[3] != null || row[4] != null || row[5] != null || row[6] != null ? (Math.abs(math.median(  [(row[1]),(row[2]),(row[3]),(row[4]),(row[5]),(row[6]) ].filter(n => n) )- averageUPGmedian).toPrecision(4)): "No Data";
-                                //if all 6 columns are null display blank, otherwise show country median minus upg avg median
+                                return row[1] != null && row[2] != null && row[3] != null && row[4] != null && row[5] != null && row[6] != null ?
+                                    upgAvgMedianDiff(
+                                        [data[1] != null ? parseFloat(data[1]) : null ,
+                                            data[2] != null ? parseFloat(data[2]) : null ,
+                                            data[3] != null ? parseFloat(data[3]) : null ,
+                                            data[4] != null ? parseFloat(data[4]) : null ,
+                                            data[5] != null ? parseFloat(data[5]) : null ,
+                                            data[6] != null ? parseFloat(data[6]) : null ],
+                                        upgvals
+                                    ) : "No Data";
+
+                                //if all 6 columns are null display "No Data"
+
                             },
                             "targets": 9
                         },
@@ -126,8 +139,6 @@
                             // Assuming Rel Freedoms is the 10th column,
 							// result is (GRI*.66667) + (SHI*.33333)
 							// if data9 or data10 are not blank, return value- else return No Data
-							// test version to show values is:
-							// return row[9] != null && row[10] != null ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(6) + '(' + row[9] + ' & ' + row[10] + ')' : "No Data";
                             "render": function ( data, type, row ) {
                                 return row[9] != null && row[10] != null ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(6) : "No Data";
                             },
