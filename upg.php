@@ -277,6 +277,8 @@ function goBack() {
     <table id="submitted" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     </table>
 
+<p>Color Coding key:  <span style="color:green;font-weight:bold">Values <11</span> and <span style="color:red;font-weight:bold">Values >19</span> </p>
+
     <table id="upgcompare" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     </table>
 
