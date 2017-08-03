@@ -1,0 +1,23 @@
+﻿<html>
+<script type="text/javascript" src="scripts/geodata.js"></script>
+<script type="text/javascript" src="scripts/math.min.js"></script>
+<body>
+
+<p id="p1">Geo data test: </p>
+<button onclick="geotest.forEach(myFunction)">Try it</button>
+
+<script type="text/javascript">
+var geotest = ["Invalid Name", "Albania", "Argentina", "Australia", "Austria", "Bangladesh", "Belgium", "Bhutan", "Bolivia", "Brazil", "Bulgaria", "Burkina Faso", "Burundi", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Congo DRC", "Costa Rica", "Côte d’Ivoire", "Croatia", "Czech Republic", "Denmark", "Dominican Republic ", "Ecuador", "Egypt", "El Salvador", "Estonia", "Ethiopia", "Fiji", "Finland", "France", "Germany", "Ghana", "Guatemala", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kenya", "Kuwait", "Latvia", "Lebanon", "Libya", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Malta", "Mexico", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Nigeria", "Norway", "Pakistan", "Panama", "Papua New Guinea", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tanzania", "Thailand", "Trinidad and Tobago", "Turkey", "UAE", "Uganda", "UK", "Ukraine", "Uruguay", "USA", "Venezuela", "Vietnam", "Zambia", "Zimbabwe"];
+
+function myFunction(resolve){
+document.getElementById("p1").innerHTML = document.getElementById("p1").innerHTML + "<br>" + resolve;
+document.getElementById("p1").innerHTML = document.getElementById("p1").innerHTML + " " + GeoRegion(resolve);
+document.getElementById("p1").innerHTML = document.getElementById("p1").innerHTML + " " + GeoLocate(resolve);
+}
+
+</script>
+
+
+
+</body>
+</html>
