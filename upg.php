@@ -73,6 +73,7 @@
             "searching": false,
 
             columns: [
+
                 { title: "Country" },											/* table col 0, data source = 0 */
                 { title: "Power Distance" },									/* table col 1, data source = 1 */
                 { title: "Individualism" },										/* table col 2, data source = 2 */
@@ -85,7 +86,8 @@
             ],
 
             "columnDefs": [
-                {
+{ className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
+               {
 
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][1]) || notEmpty(dataSub[0][2]) || notEmpty(dataSub[0][3]) || notEmpty(dataSub[0][4]) || notEmpty(dataSub[0][5]) || notEmpty(dataSub[0][6]) ?
@@ -181,6 +183,7 @@
             },
 
             "columnDefs": [
+{ className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
                 {
                     // Assuming Power Distance is the 1st column, (Name is 0th column)
                     // result is (row) - (dataSub [0][1])
@@ -274,7 +277,7 @@ function goBack() {
 </script>
 
     <p>Sending country:</p>
-    <table id="submitted" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+    <table id="submitted" class="display dataTable compact cell-border" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     </table>
 
 <p>Color Coding key:  <span style="color:green;font-weight:bold">Values <11</span> and <span style="color:red;font-weight:bold">Values >19</span> </p>
