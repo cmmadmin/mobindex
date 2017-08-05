@@ -45,35 +45,28 @@
 		datatables.min.css			provides base functionality for appearance
 		datatables.min.js			provides base functionality
 		jquery 1.12.4 or higher		provides base functionality
-
 		Additional Functionalities used:
 		math.min.js					provides math.median(a, b, c, ...) and math.distance([x1, y1], [x2, y2])
 		helper.js					custom helper for value conversions
 		geodata.js                  provides geodata functions
-
 		-->
 
 <script type="text/javascript" class="init">
-
     var dataSet= <?php
         $rawdata= file_get_contents('scripts/convertcsv.json');
         echo $rawdata;
         ?>;
-
     var dataSub = <?php
         $Country = array_column($_POST,null);
         echo "[", json_encode(explode(",",$Country[0])),"]";  // Opens posted data into js array
         ?>;
-
     $(document).ready(function() {
         $('#submitted').DataTable({                                     //This first table is just for showing submitted row
             data: dataSub,                                              //Setup needs to be seperate from the other table in order to prevent
             "paging": false,                                            //filtering and other problems from occurring....
             "scrollX": true,
             "searching": false,
-
             columns: [
-
                 { title: "Country" },											/* table col 0, data source = 0 */
                 { title: "Power Distance" },									/* table col 1, data source = 1 */
                 { title: "Individualism" },										/* table col 2, data source = 2 */
@@ -82,13 +75,10 @@
                 { title: "Long Term Orientation" },								/* table col 5, data source = 5 */
                 { title: "Indulgence" },										/* table col 6, data source = 6 */
                 { title: "Average Median Cultural Distance to UPG's"}		/* table col 9, data source = calculated, "data" column is placeholder*/
-
             ],
-
             "columnDefs": [
 { className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
                {
-
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][1]) || notEmpty(dataSub[0][2]) || notEmpty(dataSub[0][3]) || notEmpty(dataSub[0][4]) || notEmpty(dataSub[0][5]) || notEmpty(dataSub[0][6]) ?
                             upgAvgMedianDiff(
@@ -100,34 +90,27 @@
                                     notEmpty(dataSub[0][6]) ? parseFloat(dataSub[0][6]) : "-" ],
                                 upgYes(dataSet)
                             ) : "-";
-
                         //if all 6 columns are null display "No Data"
-
                     },
                     "targets": 7
                 }
                 ],
-
             "createdRow": function ( row, data, index ) {
                 if (data[7] != null) {
                     $('td', row).eq(7).addClass('highlight');
                 }
             }
-
         });
     });
     </script>
 
     <script type="text/javascript" class="init">
-
     $(document).ready(function() {
-
         $('#upgcompare').DataTable( {
             data: dataSet,
             "paging": false,
             "info": false,
             "scrollX": true,
-
             columns: [
                 { title: "UPG Country"},
                 { title: "Power Distance"},
@@ -139,49 +122,36 @@
                 { title: "Median" },
                 { title: "Partial Data?" },
                 { title: "Geographic Distance" }
-
             ],
-
             "createdRow": function ( row, data, index ) {
-                if ( data[7] != "yes" ) {  $('td', row).remove();  }
-
+                if ( data[7] != "yes" ) {  $('td', row).remove(); }
                 // dataSub [0][x] is the submitted country's column
                 // data[x] is the UPG Country column
-
                 if ( isEmpty(dataSub[0][1]) || isEmpty(data[1])) {}
                 else if ( Math.abs(dataSub[0][1] - data[1]) > 19 ) { $('td', row).eq(1).addClass('high');}
                 else if ( Math.abs(dataSub[0][1] - data[1]) < 11 ) { $('td', row).eq(1).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][2]) || isEmpty(data[2])) {}
                 else if ( Math.abs(dataSub[0][2] - data[2]) > 19 ) { $('td', row).eq(2).addClass('high');}
                 else if ( Math.abs(dataSub[0][2] - data[2]) < 11 ) { $('td', row).eq(2).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][3]) || isEmpty(data[3])) {}
                 else if ( Math.abs(dataSub[0][3] - data[3]) > 19 ) { $('td', row).eq(3).addClass('high');}
                 else if ( Math.abs(dataSub[0][3] - data[3]) < 11 ) { $('td', row).eq(3).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][4]) || isEmpty(data[4])) {}
                 else if ( Math.abs(dataSub[0][4] - data[4]) > 19 ) { $('td', row).eq(4).addClass('high');}
                 else if ( Math.abs(dataSub[0][4] - data[4]) < 11 ) { $('td', row).eq(4).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][5]) || isEmpty(data[5])) {}
                 else if ( Math.abs(dataSub[0][5] - data[5]) > 19 ) { $('td', row).eq(5).addClass('high');}
                 else if ( Math.abs(dataSub[0][5] - data[5]) < 11 ) { $('td', row).eq(5).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][6]) || isEmpty(data[6])) {}
                 else if ( Math.abs(dataSub[0][6] - data[6]) > 19 ) { $('td', row).eq(6).addClass('high');}
                 else if ( Math.abs(dataSub[0][6] - data[6]) < 11 ) { $('td', row).eq(6).addClass('low'); }
-
                 if ( isEmpty(dataSub[0][7]) || isEmpty(data[7])) {}
                 else if ( row[7] > 19 ) { $('td', row).eq(7).addClass('high');}   // This is not working properly...
                 else if ( row[7] < 11 ) { $('td', row).eq(7).addClass('low'); }   // This is not working properly...
-
                 if ( isEmpty(row[1]) || isEmpty(row[2]) || isEmpty(row[3]) || isEmpty(row[4]) || isEmpty(row[5]) || isEmpty(row[6])) {
                     $('td', row).eq(8).addClass('high');
                 }
-
             },
-
             "columnDefs": [
 { className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
                 {
@@ -244,7 +214,6 @@
                     },
                     "targets": 8
                 },
-
                 {
                     // Space for geodata
                     "render": function ( data, type, row ) {
@@ -252,17 +221,12 @@
                     },
                     "targets": 9
                 }
-
             ]
-
         } );
-
         $('#upgcompare tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('selected');
         } );
-
     } );
-
 </script>
 
 <div class="et_pb_row">

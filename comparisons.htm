@@ -90,36 +90,36 @@
                     dom: 'Bfrtip',
                     select: {style: 'multi'},
                     columns: [
-                        { "data": 0, title: "Country" },											/* table col 0, data source = 0 */
-                        { "data": 1, title: "Power Distance" },										/* table col 1, data source = 1 */
-                        { "data": 2, title: "Individualism" },										/* table col 2, data source = 2 */
-                        { "data": 3, title: "Masculinity" },										/* table col 3, data source = 3 */
-                        { "data": 4, title: "Uncertainty Avoidance" },								/* table col 4, data source = 4 */
-                        { "data": 5, title: "Long Term Orientation" },								/* table col 5, data source = 5 */
-                        { "data": 6, title: "Indulgence" },											/* table col 6, data source = 6 */
+                        { "data": 0, title: "&#127760" },											/* table col 0, data source = 0 "Country"  */
+                        { "data": 1, title: "&#128200" },										/* table col 1, data source = 1 "Power Distance" */
+                        { "data": 2, title: "&#9432" },										/* table col 2, data source = 2 "Individualism"  */
+                        { "data": 3, title: "&#128170" },										/* table col 3, data source = 3 "Masculinity" */
+                        { "data": 4, title: "&#x1f4d6" },								/* table col 4, data source = 4 "Uncertainty Avoidance" */
+                        { "data": 5, title: "&#128198" },								/* table col 5, data source = 5 "Long Term Orientation"  */
+                        { "data": 6, title: "&#128526" },											/* table col 6, data source = 6 "Indulgence" */
                         { "data": 7, title: "UPG Nation" },											/* hidden table col 7, data source = 7 */
                         { "data": 8, title: "Mob Index Nation" },									/* hidden table col 8, data source = 8 */
-                        { "data": null, title: "Average Median Cultural Distance to UPG's"},		/* table col 9, data source = calculated TBE, "data" column is placeholder*/
-                        { "data": null, title: "Religious Freedoms"},								/* table col 10, data source = calc from 9&10, "data" column is placeholder */
+                        { "data": null, title: "&#37"},		/* table col 9, data source = calculated TBE, "data" column is placeholder "Average Median Cultural Distance to UPG's" */
+                        { "data": null, title: "&#128591"},								/* table col 10, data source = calc from 9&10, "data" column is placeholder Religious Freedoms  */
                         { "data": 9, title: "Government Restrictions Index (GRI)" },				/* hidden table col 11, data source = 9 */
                         { "data": 10, title: "Social Hostilities Index (SHI)" },					/* hidden table col 12, data source = 10 */
-                        { "data": 11, title: "Prosperity Rank" },									/* table col 13, data source = 11 */
+                        { "data": 11, title: "&#128176" },									/* table col 13, data source = 11 "Prosperity Rank"   */
                         { "data": 12,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-							title: "Evangelical #s" },									/* table col 14, data source = 12 */
+							title: "&#10014" },									/* table col 14, data source = 12 */
                         { "data": 13,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "Current Sending In Country" },						/* table col 15, data source = 13 */
+                            title: "&#9737" },						/* table col 15, data source = 13  "Current Sending In Country" */
                         { "data": 14,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "Current Sending Abroad" },							/* table col 16, data source = 14 */
-                        { "data": 15, title: "% less than 15 years" },								/* table col 17, data source = 15 */
+                            title: "&#9992" },							/* table col 16, data source = 14 "Current Sending Abroad"  */
+                        { "data": 15, title: "&#60 15 " },								/* table col 17, data source = 15 "% less than 15 years"   */
                         { "data": 16,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "In Country UPG Access" },								/* table col 18, data source = 16 */
+                            title: "&#9919" },								/* table col 18, data source = 16 "In Country UPG Access" */
                         { "data": 17,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "Regional UPG Access" }								/* table col 19, data source = 17 */
+                            title: "&#174 &#9919" }								/* table col 19, data source = 17 "Regional UPG Access" */
 					],
 
 					"columnDefs": [
@@ -184,9 +184,9 @@
                             extend: 'selected',
                             action: function ( e, dt, node, config ) {
                                 var rows = dt.rows( { selected: true } ).data();
-                                if (dt.rows( { selected: true } ).count() < 2) {
-                                    alert ('You must select multiple countries for this function');
-                                }
+                                if (dt.rows( { selected: true } ).count() !== 1) {
+                                    alert ('Only 1 country may be selected for this function');
+								}
                                 else {
                                     post("cultures.php", rows);}
                             },
@@ -374,13 +374,9 @@
 				 -->
 
 				<h1>Comparisons</h1>
-
-				<p>Icon Key: Country: Power Distance: Individualism: Masculinity: Uncertainty Avoidance: Long Term Orientation: Indulgence:</p>
-				<p></p>
-				<p>  Average Median Cultural Distance to UPG's: Religious Freedoms: Prosperity Rank: Evangelical #s: Current Sending In Country:</p>
-				<p></p>
-				<p>  % less than 15 years: In Country UPG Access: Regional UPG Access</p>
-				<p></p>
+<p style="font-size:90%;">Country: &#127760/ Power Distance: &#128200/ Individualism: &#9432/ Masculinity: &#128170/ Uncertainity Avoidance: &#x1f4d6/ Long Term Orientation: &#128198/ Indulgence: &#128526 </p>
+<p style="font-size:90%;"> Average Median Cultural Distance to UPG's: &#37/ Religious Freedoms: &#128591/ Prosperity Rank: &#128176/  Evangelical #s: &#10014/ Current Sending In Country: &#9737</p>
+<p style="font-size:90%;">Current Sending Abroad: &#9992/ % less than 15 years: &#60 15 / In Country UPG Access: &#9919 /Regional UPG Access&#174 &#9919      </p>
 
 				<table id="example" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
 				</table>

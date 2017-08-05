@@ -1,0 +1,8 @@
+1. save excel data as csv file.
+2. open the csv file with a text editor such as notepad-  delete all empty records after the final country and save the file.
+3. use csv to json converter url: http://www.convertcsv.com/csv-to-json.htm
+	a. On this page, Step 1: choose your csv file
+	b. in the "Step 3: Choose output options" dropdown, delete null columns (should be 19 to the end) under "Display which field positions"
+	c. in the "Step 5: Generate output" area, select CSV to JSON Array.
+	d. in the area labeled "Save your result" select "Download result"
+	e. move the file named "convertcsv.json" to the server in the scripts folder.
