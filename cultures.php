@@ -106,11 +106,13 @@
 
     <script type="text/javascript" class="init">
     $(document).ready(function() {
-        $('#upgcompare').DataTable( {
+        var table = $('#upgcompare').DataTable( {
             data: dataSet,
             "paging": false,
             "info": false,
             "scrollX": true,
+            dom: 'Bfrtip',
+            select: {style: 'multi'},
             columns: [
                 { title: "Country"},
                 { title: "Power Distance"},
@@ -123,6 +125,17 @@
                 { title: "Partial Data?" },
                 { title: "Geographic Distance" }
             ],
+            buttons: [
+                        {
+                            extend: 'selected',
+                            action: function ( e, dt, node, config ) {
+                                var rows = dt.rows({selected: true});
+                                table.rows('.selected').remove().draw( false );
+                                },
+
+							text: 'Remove selected'
+                        }
+                    ],
             "createdRow": function ( row, data, index ) {
                 // dataSub [0][x] is the submitted country's column
                 // data[x] is the UPG Country column
@@ -152,48 +165,45 @@
                 }
             },
             "columnDefs": [
-{ className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
+                { className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
                 {
                     // Assuming Power Distance is the 1st column, (Name is 0th column)
-                    // result is (row) - (dataSub [0][1])
-                    // if data or dataSub[0][1] are not blank, return value- else return null  must use empty string for dataSub
-                    // test version to show values used for col 1 is
-                    // return dataSub[0][1] != "" && row[1] != null ? Math.abs((dataSub[0][1])-(row[1])) + '(' + dataSub[0][1] + ' & ' + row[1] + ')' : "No Data";
+                    // if data or dataSub[0][1] are not blank, return value- else return "-"
                     "render": function ( data, type, row, meta ) {
                         return notEmpty(dataSub[0][1]) && notEmpty(row[1]) ? Math.abs((dataSub[0][1])-(row[1])) : "-";
                     },
                     "targets": 1
                 },
                 {
-                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])must use empty string for dataSub
+                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][2]) && notEmpty(row[2]) ? Math.abs((dataSub[0][2])-(row[2])) : "-";
                     },
                     "targets": 2
                 },
                 {
-                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])must use empty string for dataSub
+                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][3]) && notEmpty(row[3]) ? Math.abs((dataSub[0][3])-(row[3])) : "-";
                     },
                     "targets": 3
                 },
                 {
-                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])must use empty string for dataSub
+                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][4]) && notEmpty(row[4]) ? Math.abs((dataSub[0][4])-(row[4])) : "-";
                     },
                     "targets": 4
                 },
                 {
-                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])must use empty string for dataSub
+                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][5]) && notEmpty(row[5]) ? Math.abs((dataSub[0][5])-(row[5])) : "-";
                     },
                     "targets": 5
                 },
                 {
-                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6]) must use empty string for dataSub
+                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6])
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][6]) && notEmpty(row[6]) ? Math.abs((dataSub[0][6])-(row[6]))  : "-";
                     },
@@ -216,7 +226,7 @@
                 {
                     // Space for geodata
                     "render": function ( data, type, row ) {
-                        return  notEmpty(row[0]) &&  notEmpty(dataSub[0][0])? GeoRegion(row[0])+ ", " +GeoDiff(dataSub[0][0],row[0]) : "-"; // GeoDiff(dataSub[0][0],row[0])
+                        return  notEmpty(row[0]) &&  notEmpty(dataSub[0][0])? GeoRegion(row[0])+ ", " +GeoDiff(dataSub[0][0],row[0]) : "-";
                     },
                     "targets": 9
                 }
@@ -229,7 +239,7 @@
 </script>
 
 <div class="et_pb_row">
-    <h1>Culture Copmparison</h1>
+    <h1>Culture Comparison</h1>
 
 <button onclick="goBack()">Return</button>
 
@@ -245,8 +255,7 @@ function goBack() {
 
 <p>Color Coding key:  <span style="color:green;font-weight:bold">Values <11</span> and <span style="color:red;font-weight:bold">Values >19</span> </p>
 
-    <h1>Filter Using Search Box</h1>
-    <table id="upgcompare" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+<table id="upgcompare" class="display dataTable compact" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
     </table>
 
 </div>
