@@ -113,6 +113,7 @@
             "scrollX": true,
             dom: 'Bfrtip',
             select: {style: 'os'},
+            fixedHeader: true,
             columns: [
                 { title: "Country"},
                 { title: "Power Distance"},

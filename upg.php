@@ -125,6 +125,7 @@
                 "paging": false,
                 "info": false,
                 "scrollX": true,
+                fixedHeader: true,
                 columns: [{
                     title: "UPG Country"
                 }, {
