@@ -78,47 +78,47 @@
             $(document).ready(function() {
                 $('#example').DataTable( {
                     data:dataSet,
-                   "scrollX": true,
+                    "scrollX": true,
 					"paging": false,
                     dom: 'Bfrtip',
-                    select: {style: 'multi'},
+                    select: {style: 'single'},
                     columns: [
-                        { "data": 0, title: "&#127760" },											/* table col 0, data source = 0 "Country"  */
-                        { "data": 1, title: "&#128200" },										/* table col 1, data source = 1 "Power Distance" */
-                        { "data": 2, title: "&#9432" },										/* table col 2, data source = 2 "Individualism"  */
-                        { "data": 3, title: "&#128170" },										/* table col 3, data source = 3 "Masculinity" */
+                        { "data": 0, title: "&#127760" },								/* table col 0, data source = 0 "Country"  */
+                        { "data": 1, title: "&#128200" },								/* table col 1, data source = 1 "Power Distance" */
+                        { "data": 2, title: "&#9432" },									/* table col 2, data source = 2 "Individualism"  */
+                        { "data": 3, title: "&#128170" },								/* table col 3, data source = 3 "Masculinity" */
                         { "data": 4, title: "&#x1f4d6" },								/* table col 4, data source = 4 "Uncertainty Avoidance" */
                         { "data": 5, title: "&#128198" },								/* table col 5, data source = 5 "Long Term Orientation"  */
-                        { "data": 6, title: "&#128526" },											/* table col 6, data source = 6 "Indulgence" */
-                        { "data": 7, title: "UPG Nation" },											/* hidden table col 7, data source = 7 */
-                        { "data": 8, title: "Mob Index Nation" },									/* hidden table col 8, data source = 8 */
-                        { "data": null, title: "&#37"},		/* table col 9, data source = calculated TBE, "data" column is placeholder "Average Median Cultural Distance to UPG's" */
-                        { "data": null, title: "&#128591"},								/* table col 10, data source = calc from 9&10, "data" column is placeholder Religious Freedoms  */
-                        { "data": 9, title: "Government Restrictions Index (GRI)" },				/* hidden table col 11, data source = 9 */
-                        { "data": 10, title: "Social Hostilities Index (SHI)" },					/* hidden table col 12, data source = 10 */
-                        { "data": 11, title: "&#128176" },									/* table col 13, data source = 11 "Prosperity Rank"   */
+                        { "data": 6, title: "&#128526" },								/* table col 6, data source = 6 "Indulgence" */
+                        { "data": 7, title: "UPG Nation" },							/* hidden table col 7, data source = 7 */
+                        { "data": 8, title: "Mob Index Nation" },				/* hidden table col 8, data source = 8 */
+                        { "data": null, title: "&#37"},		    /* table col 9, data source = calculated TBE, "data" column is placeholder "Average Median Cultural Distance to UPG's" */
+                        { "data": null, title: "&#128591"},		/* table col 10, data source = calc from 9&10, "data" column is placeholder Religious Freedoms  */
+                        { "data": 9, title: "Government Restrictions Index (GRI)" },		/* hidden table col 11, data source = 9 */
+                        { "data": 10, title: "Social Hostilities Index (SHI)" },				/* hidden table col 12, data source = 10 */
+                        { "data": 11, title: "&#128176" },									            /* table col 13, data source = 11 "Prosperity Rank"   */
                         { "data": 12,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-							title: "&#10014" },									/* table col 14, data source = 12 */
+							              title: "&#10014" },									        /* table col 14, data source = 12 */
                         { "data": 13,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "&#9737" },						/* table col 15, data source = 13  "Current Sending In Country" */
+                            title: "&#9737" },						              /* table col 15, data source = 13  "Current Sending In Country" */
                         { "data": 14,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "&#9992" },							/* table col 16, data source = 14 "Current Sending Abroad"  */
-                        { "data": 15, title: "&#60 15 " },								/* table col 17, data source = 15 "% less than 15 years"   */
+                            title: "&#9992" },							            /* table col 16, data source = 14 "Current Sending Abroad"  */
+                        { "data": 15, title: "&#60 15 " },							/* table col 17, data source = 15 "% less than 15 years"   */
                         { "data": 16,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "&#9919" },								/* table col 18, data source = 16 "In Country UPG Access" */
+                            title: "&#9919" },								          /* table col 18, data source = 16 "In Country UPG Access" */
                         { "data": 17,
                             "render": $.fn.dataTable.render.number( ',', '.', 0),					/* render data formatting */
-                            title: "&#174 &#9919" }								/* table col 19, data source = 17 "Regional UPG Access" */
+                            title: "&#174 &#9919" }								      /* table col 19, data source = 17 "Regional UPG Access" */
 					],
 
 					"columnDefs": [
 						{
-						    "targets": [ 7, 8, 11, 12 ],											// selects table col 7,8,11,12
-							"visible": false														// hide selected columns
+              "targets": [ 7, 8, 11, 12 ],							// selects table col 7,8,11,12
+							"visible": false													// hide selected columns
 						},
                         {
 
@@ -141,10 +141,10 @@
                         },
                         {
                             // Assuming Rel Freedoms is the 10th column,
-							// result is (GRI*.66667) + (SHI*.33333)
-							// if data9 or data10 are not blank, return value- else return No Data
+							              // result is (GRI*.66667) + (SHI*.33333)
+							              // if data9 or data10 are not blank, return value- else return No Data
                             "render": function ( data, type, row ) {
-                                return notEmpty(row[9]) && notEmpty(row[10]) ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(4) : "-";
+                                return notEmpty(row[9]) && notEmpty(row[10]) ? ((row[9]*.6667)+(row[10]*.33333)).toPrecision(3) : "-";
                             },
                             "targets": 10
                         },

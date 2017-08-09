@@ -243,7 +243,7 @@
                     }, {
                         // Assuming Partial Data indicator is the 8th column, result is "Partial Data" if any column is null
                         "render": function(data, type, row) {
-                            return isEmpty(row[1]) || isEmpty(row[2]) || isEmpty(row[3]) || isEmpty(row[4]) || isEmpty(row[5]) || isEmpty(row[6]) ? "Partial Data" : "";
+                            return isEmpty(row[1]) || isEmpty(row[2]) || isEmpty(row[3]) || isEmpty(row[4]) || isEmpty(row[5]) || isEmpty(row[6]) ? "Y" : "";
                         },
                         "targets": 8
                     }, {
@@ -261,9 +261,6 @@
                     }
 
                 ]
-            });
-            $('#upgcompare tbody').on('click', 'tr', function() {
-                $(this).toggleClass('selected');
             });
         });
 
