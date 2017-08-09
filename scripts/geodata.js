@@ -13716,13 +13716,13 @@ function GeoDiff(sender, receiver){
         var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
         dist = Math.acos(dist)
         dist = dist * 180/Math.PI
-        dist = dist * 60 * 1.1515
+        dist = dist * 60 * 1.85316
 
         if (dist < 1) {
-            output = "0 miles"
+            output = "0 km"
         }
         else{
-            output = dist.toPrecision(4) + " miles";
+            output = dist.toPrecision(5) + " km";
         }
         return output;
 
