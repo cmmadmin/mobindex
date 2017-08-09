@@ -13653,6 +13653,11 @@ function namePatch(name){
         return "United Kingdom";
     }
 
+    // "Dominican Republic " to "Dominican Republic"
+    if (name == "Dominican Republic "){
+        return "Dominican Republic";
+    }
+
     // all others return as received
     else{
         return name;
