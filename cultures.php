@@ -112,7 +112,7 @@
             "info": false,
             "scrollX": true,
             dom: 'Bfrtip',
-            select: {style: 'multi'},
+select: {style: 'multi'},
             columns: [
                 { title: "Country"},
                 { title: "Power Distance"},
@@ -123,15 +123,16 @@
                 { title: "Indulgence" },
                 { title: "Median" },
                 { title: "Partial Data?" },
-                { title: "Geographic Distance" }
+                { title: "Region" },
+                { title: "Kilometers" }
             ],
             buttons: [
                         {
                             extend: 'selected',
                             action: function ( e, dt, node, config ) {
                                 var rows = dt.rows({selected: true});
-                                table.rows('.selected').remove().draw( false );
-                                },
+				table.rows('.selected').remove().draw( false );
+                                  },
 
 							text: 'Remove selected'
                         }
@@ -165,45 +166,48 @@
                 }
             },
             "columnDefs": [
-                { className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
+{ className: "dt-center", "targets": [ 1,2, 3, 4, 5, 6,7 ] },
                 {
                     // Assuming Power Distance is the 1st column, (Name is 0th column)
-                    // if data or dataSub[0][1] are not blank, return value- else return "-"
+                    // result is (row) - (dataSub [0][1])
+                    // if data or dataSub[0][1] are not blank, return value- else return null  must use empty string for dataSub
+                    // test version to show values used for col 1 is
+                    // return dataSub[0][1] != "" && row[1] != null ? Math.abs((dataSub[0][1])-(row[1])) + '(' + dataSub[0][1] + ' & ' + row[1] + ')' : "No Data";
                     "render": function ( data, type, row, meta ) {
                         return notEmpty(dataSub[0][1]) && notEmpty(row[1]) ? Math.abs((dataSub[0][1])-(row[1])) : "-";
                     },
                     "targets": 1
                 },
                 {
-                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])
+                    // Assuming Individualism is the 2nd column, result is (row) - (dataSub [0][2])must use empty string for dataSub
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][2]) && notEmpty(row[2]) ? Math.abs((dataSub[0][2])-(row[2])) : "-";
                     },
                     "targets": 2
                 },
                 {
-                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])
+                    // Assuming Masculinity is the 3rd column, result is (row) - (dataSub [0][3])must use empty string for dataSub
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][3]) && notEmpty(row[3]) ? Math.abs((dataSub[0][3])-(row[3])) : "-";
                     },
                     "targets": 3
                 },
                 {
-                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])
+                    // Assuming Uncertainty Avoidance is the 4th column, result is (row) - (dataSub [0][4])must use empty string for dataSub
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][4]) && notEmpty(row[4]) ? Math.abs((dataSub[0][4])-(row[4])) : "-";
                     },
                     "targets": 4
                 },
                 {
-                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])
+                    // Assuming Long Term Orientation is the 5th column, result is (row) - (dataSub [0][5])must use empty string for dataSub
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][5]) && notEmpty(row[5]) ? Math.abs((dataSub[0][5])-(row[5])) : "-";
                     },
                     "targets": 5
                 },
                 {
-                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6])
+                    // Assuming Indulgence is the 6th column, result is (row) - (dataSub [0][6]) must use empty string for dataSub
                     "render": function ( data, type, row ) {
                         return notEmpty(dataSub[0][6]) && notEmpty(row[6]) ? Math.abs((dataSub[0][6])-(row[6]))  : "-";
                     },
@@ -223,14 +227,22 @@
                     },
                     "targets": 8
                 },
-                {
-                    // Space for geodata
-                    "render": function ( data, type, row ) {
-                        return  notEmpty(row[0]) &&  notEmpty(dataSub[0][0])? GeoRegion(row[0])+ ", " +GeoDiff(dataSub[0][0],row[0]) : "-";
-                    },
-                    "targets": 9
-                }
-            ]
+               {
+                        // Space for Region
+                        "render": function(data, type, row) {
+                            return notEmpty(row[0]) && notEmpty(dataSub[0][0]) ? GeoRegion(row[0]) : "-"; // GeoDiff(dataSub[0][0],row[0])
+                        },
+                        "targets": 9
+                    }, {
+                        // Space for kilometers 
+                        "render": function(data, type, row) {
+                            return notEmpty(row[0]) && notEmpty(dataSub[0][0]) ? GeoDiff(dataSub[0][0], row[0]) : "-"; 
+ // GeoDiff(dataSub[0][0],row[0])
+                        },
+                        "targets": 10
+                    }
+
+                ]
         } );
         $('#upgcompare tbody').on( 'click', 'tr', function () {
             $(this).toggleClass('selected');
