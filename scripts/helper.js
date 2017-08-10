@@ -164,3 +164,43 @@ function upgAvgMedianDiff(mod, arr) {
     return "-";
 
 }
+
+function highlightValues( row, data, dataSub ) {
+    // dataSub [0][x] is the submitted country's column
+    // data[x] is the UPG Country column
+    if ( isEmpty(dataSub[0][1]) || isEmpty(data[1])) {}
+    else if ( Math.abs(dataSub[0][1] - data[1]) > 19 ) { $('td', row).eq(1).addClass('high');}
+    else if ( Math.abs(dataSub[0][1] - data[1]) < 11 ) { $('td', row).eq(1).addClass('low'); }
+    if ( isEmpty(dataSub[0][2]) || isEmpty(data[2])) {}
+    else if ( Math.abs(dataSub[0][2] - data[2]) > 19 ) { $('td', row).eq(2).addClass('high');}
+    else if ( Math.abs(dataSub[0][2] - data[2]) < 11 ) { $('td', row).eq(2).addClass('low'); }
+    if ( isEmpty(dataSub[0][3]) || isEmpty(data[3])) {}
+    else if ( Math.abs(dataSub[0][3] - data[3]) > 19 ) { $('td', row).eq(3).addClass('high');}
+    else if ( Math.abs(dataSub[0][3] - data[3]) < 11 ) { $('td', row).eq(3).addClass('low'); }
+    if ( isEmpty(dataSub[0][4]) || isEmpty(data[4])) {}
+    else if ( Math.abs(dataSub[0][4] - data[4]) > 19 ) { $('td', row).eq(4).addClass('high');}
+    else if ( Math.abs(dataSub[0][4] - data[4]) < 11 ) { $('td', row).eq(4).addClass('low'); }
+    if ( isEmpty(dataSub[0][5]) || isEmpty(data[5])) {}
+    else if ( Math.abs(dataSub[0][5] - data[5]) > 19 ) { $('td', row).eq(5).addClass('high');}
+    else if ( Math.abs(dataSub[0][5] - data[5]) < 11 ) { $('td', row).eq(5).addClass('low'); }
+    if ( isEmpty(dataSub[0][6]) || isEmpty(data[6])) {}
+    else if ( Math.abs(dataSub[0][6] - data[6]) > 19 ) { $('td', row).eq(6).addClass('high');}
+    else if ( Math.abs(dataSub[0][6] - data[6]) < 11 ) { $('td', row).eq(6).addClass('low'); }
+    if ( isEmpty(dataSub[0][7]) || isEmpty(data[7])) {}
+    else if ( row[7] > 19 ) { $('td', row).eq(7).addClass('high');}   // This is not working properly...
+    else if ( row[7] < 11 ) { $('td', row).eq(7).addClass('low'); }   // This is not working properly...
+    if ( isEmpty(row[1]) || isEmpty(row[2]) || isEmpty(row[3]) || isEmpty(row[4]) || isEmpty(row[5]) || isEmpty(row[6])) {
+        $('td', row).eq(8).addClass('high');
+    }
+}
+
+function showTooltip( me, theevent, tipContent ) {
+    $(me).qtip({
+        overwrite: true, // Make sure the tooltip won't be overridden once created
+        content: tipContent,
+        show: {
+            event: theevent.type, // Use the same show event as the one that triggered the event handler
+            ready: true // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
+        }
+    }, theevent); // Pass through our original event to qTip
+}

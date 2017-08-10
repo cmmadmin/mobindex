@@ -1,0 +1,34 @@
+<!--	/* Styling for color choices
+td.low is for good/ close values
+td.high is for bad/ far values
+*/   -->
+
+td.highlight {
+  font-weight: bold;
+  color: blue;
+}
+
+td.low {
+  font-weight: bold;
+  color: green;
+}
+
+td.high {
+  font-weight: bold;
+  color: red;
+}
+
+a { color: #ffb134; }
+body { color: #000000; }
+.et_pb_counter_amount, .et_pb_featured_table .et_pb_pricing_heading, .et_quote_content, .et_link_content, .et_audio_content { background-color: #626b63; }
+#main-header, #main-header .nav li ul, .et-search-form, #main-header .et_mobile_menu { background-color: #ffffff; }
+#top-header, #et-secondary-nav li ul { background-color: #dde3dc; }
+.et-search-form, .nav li ul, .et_mobile_menu, .footer-widget li:before, .et_pb_pricing li:before, blockquote { border-color: #626b63; }
+#main-footer { background-color: #2f2f2a; }
+#top-menu a { color: #000000; }
+#top-menu li.current-menu-ancestor > a, #top-menu li.current-menu-item > a, .bottom-nav li.current-menu-item > a { color: #ffb134; }
+body.et_fixed_nav.et_secondary_nav_enabled #main-header { top: 0px; padding-top: 10px; min-height: 51px; }
+.et_fixed_nav.et_secondary_nav_enabled #page-container { padding-top: 62px;	}
+#main-header h1 { line-height: 2.875rem; }
+.index-key { margin-top: 15px; margin-bottom: 15px; }
+.et_pb_fullwidth_header { padding-top: 10px; }
