@@ -157,21 +157,21 @@ $(document).ready(function() {
         $(this).toggleClass('selected');
     } );
 
-    $(document).on('mouseover', 'thead .country', function (event) { showTooltip( this, event, 'Country' ); });
-    $(document).on('mouseover', 'thead .power', function (event) { showTooltip( this, event, 'Power Distance' ); });
-    $(document).on('mouseover', 'thead .individualism', function (event) { showTooltip( this, event, 'Individualism' ); });
-    $(document).on('mouseover', 'thead .masculinity', function (event) { showTooltip( this, event, 'Masculinity' ); });
-    $(document).on('mouseover', 'thead .uncertainty', function (event) { showTooltip( this, event, 'Uncertainty Avoidance' ); });
-    $(document).on('mouseover', 'thead .orientation', function (event) { showTooltip( this, event, 'Long Term Orientation' ); });
-    $(document).on('mouseover', 'thead .indulgence', function (event) { showTooltip( this, event, 'Indulgence' ); });
-    $(document).on('mouseover', 'thead .median', function (event) { showTooltip( this, event, 'Average Median Cultural Distance to UPGs' ); });
-    $(document).on('mouseover', 'thead .freedom', function (event) { showTooltip( this, event, 'Religious Freedoms' ); });
-    $(document).on('mouseover', 'thead .prosperity', function (event) { showTooltip( this, event, 'Prosperity Rank' ); });
-    $(document).on('mouseover', 'thead .evangelical', function (event) { showTooltip( this, event, 'Number of Evangelicals' ); });
-    $(document).on('mouseover', 'thead .incountry', function (event) { showTooltip( this, event, 'Current Sending In Country' ); });
-    $(document).on('mouseover', 'thead .abroad', function (event) { showTooltip( this, event, 'Current Sending Abroad' ); });
-    $(document).on('mouseover', 'thead .lessfifteen', function (event) { showTooltip( this, event, '% less than 15 years' ); });
-    $(document).on('mouseover', 'thead .incountryupg', function (event) { showTooltip( this, event, 'In Country UPG Access' ); });
-    $(document).on('mouseover', 'thead .regionalupg', function (event) { showTooltip( this, event, 'Regional UPG Access' ); });
+    $(document).on('mouseover', '.country', function (event) { showTooltip( this, event, 'Country' ); });
+    $(document).on('mouseover', '.power', function (event) { showTooltip( this, event, 'Power Distance' ); });
+    $(document).on('mouseover', '.individualism', function (event) { showTooltip( this, event, 'Individualism' ); });
+    $(document).on('mouseover', '.masculinity', function (event) { showTooltip( this, event, 'Masculinity' ); });
+    $(document).on('mouseover', '.uncertainty', function (event) { showTooltip( this, event, 'Uncertainty Avoidance' ); });
+    $(document).on('mouseover', '.orientation', function (event) { showTooltip( this, event, 'Long Term Orientation' ); });
+    $(document).on('mouseover', '.indulgence', function (event) { showTooltip( this, event, 'Indulgence' ); });
+    $(document).on('mouseover', '.median', function (event) { showTooltip( this, event, 'Average Median Cultural Distance to UPGs' ); });
+    $(document).on('mouseover', '.freedom', function (event) { showTooltip( this, event, 'Religious Freedoms' ); });
+    $(document).on('mouseover', '.prosperity', function (event) { showTooltip( this, event, 'Prosperity Rank' ); });
+    $(document).on('mouseover', '.evangelical', function (event) { showTooltip( this, event, 'Number of Evangelicals' ); });
+    $(document).on('mouseover', '.incountry', function (event) { showTooltip( this, event, 'Current Sending In Country' ); });
+    $(document).on('mouseover', '.abroad', function (event) { showTooltip( this, event, 'Current Sending Abroad' ); });
+    $(document).on('mouseover', '.lessfifteen', function (event) { showTooltip( this, event, '% less than 15 years' ); });
+    $(document).on('mouseover', '.incountryupg', function (event) { showTooltip( this, event, 'In Country UPG Access' ); });
+    $(document).on('mouseover', '.regionalupg', function (event) { showTooltip( this, event, 'Regional UPG Access' ); });
 
 } );

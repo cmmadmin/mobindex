@@ -201,6 +201,12 @@ function showTooltip( me, theevent, tipContent ) {
         show: {
             event: theevent.type, // Use the same show event as the one that triggered the event handler
             ready: true // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
+        },
+        style: {
+            classes: 'qtip-bootstrap'
+        },
+        position: {
+            at: 'bottom center'
         }
     }, theevent); // Pass through our original event to qTip
 }
